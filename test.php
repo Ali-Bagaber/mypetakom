@@ -9,6 +9,6 @@ if ($result->num_rows > 0) {
     echo "Connection successful and data found.";
 } else {
     echo "Connected, but no data found.";
-    <p>hi</p>
+    
 }
 ?>
