@@ -1,9 +1,8 @@
- <?php
+<?php
+include '../../Databased/db_connect.php';
 
-include 'Databased/db_connect.php';
-
-
-
+// Hardcoded user_id for testing (e.g., student with ID = 1)
+$user_id = 1;
 
 $sql = "SELECT e.title AS event_name, 
                m.points AS merit_points, 
@@ -20,6 +19,7 @@ $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 ?>
+
 
 <!DOCTYPE html>
 <html>
