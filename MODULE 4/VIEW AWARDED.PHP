@@ -1,13 +1,9 @@
  <?php
-session_start();
+
 include 'Databased/db_connect.php';
 
-if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
-    exit;
-}
 
-$user_id = $_SESSION['user_id'];
+
 
 $sql = "SELECT e.title AS event_name, 
                m.points AS merit_points, 
