@@ -59,8 +59,7 @@ include '../HADER_SIDER_FOOTER/HST.PHP';
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>View Awarded Merits – Student Dashboard</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../all_dashbord/dashbord.css">
-  <link rel="stylesheet" href="./module_4.css">
+  <link rel="stylesheet" href="../../mypetakom/MODULE_4/module_4.css">
 </head>
 <body>
   
@@ -88,7 +87,7 @@ include '../HADER_SIDER_FOOTER/HST.PHP';
           </div>
           <div class="stat-card" style="background: linear-gradient(135deg, var(--success), #48c78e);">
             <div class="stat-number"><?= $current_semester_points ?></div>
-            <div class="stat-label">Current Year Points</div>
+            <div class="stat-label">Current Semester Points</div>
           </div>
           <div class="stat-card" style="background: linear-gradient(135deg, var(--warning), #ffd93d);">
             <div class="stat-number"><?= count($merits_data) ?></div>

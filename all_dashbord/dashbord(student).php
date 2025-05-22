@@ -97,7 +97,7 @@
   $page_title = "Student Dashboard";
 
   // Include header and sidebar
-  include '../HADER_SIDER_FOOTER/HST.PHP';
+  include '../../mypetakom/HADER_SIDER_FOOTER/HST.PHP';
   ?>
 
 
@@ -109,9 +109,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Dashboard – Awarded Merits</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="./dashbord.css">
+    <link rel="stylesheet" href="../../mypetakom/CSS/dashbord.css">
 
-    
   </head>
   <body>
   <!-- Main Content -->
@@ -185,19 +184,21 @@
     </div>
 
     <div class="stats-row">
-      <!-- Merit Growth Chart -->
-      <div class="chart-card">
-        <h3>Merit Growth Over Time (<?= $current_year ?>)</h3>
-        <canvas id="statisticsChart" width="400" height="200"></canvas>
-        <div class="chart-buttons">
-          <button class="btn-export" onclick="exportChart()">
-            <i class="fas fa-file-export"></i> Export
-          </button>
-          <button class="btn-print" onclick="window.print()">
-            <i class="fas fa-print"></i> Print
-          </button>
-        </div>
-      </div>
+<!-- Merit Growth Chart -->
+<div class="chart-card">
+  <h3>Merit Growth Over Time (<?= $current_year ?>)</h3>
+  <div class="chart-wrapper">
+    <canvas id="statisticsChart"></canvas>
+  </div>
+  <div class="chart-buttons">
+    <button class="btn-export" onclick="exportChart()">
+      <i class="fas fa-file-export"></i> Export
+    </button>
+    <button class="btn-print" onclick="window.print()">
+      <i class="fas fa-print"></i> Print
+    </button>
+  </div>
+</div>
 
       <!-- Recent Awarded Merits Table -->
       <div class="merits-table">
@@ -262,69 +263,69 @@
   const monthlyData = <?= json_encode(array_values($monthly_data)) ?>;
   const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-  const statisticsChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-          labels: monthNames,
-          datasets: [{
-              label: 'Merit Points',
-              data: monthlyData,
-              borderColor: 'rgb(67, 97, 238)',
-              backgroundColor: 'rgba(67, 97, 238, 0.1)',
-              borderWidth: 3,
-              fill: true,
-              tension: 0.4,
-              pointBackgroundColor: 'rgb(67, 97, 238)',
-              pointBorderColor: '#fff',
-              pointBorderWidth: 2,
-              pointRadius: 6,
-              pointHoverRadius: 8
-          }]
-      },
-      options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-              legend: {
-                  display: true,
-                  position: 'top',
-              },
-              tooltip: {
-                  mode: 'index',
-                  intersect: false,
-                  backgroundColor: 'rgba(0,0,0,0.8)',
-                  titleColor: '#fff',
-                  bodyColor: '#fff',
-                  borderColor: 'rgb(67, 97, 238)',
-                  borderWidth: 1
-              }
-          },
-          scales: {
-              y: {
-                  beginAtZero: true,
-                  grid: {
-                      color: 'rgba(0,0,0,0.1)'
-                  },
-                  ticks: {
-                      color: '#666'
-                  }
-              },
-              x: {
-                  grid: {
-                      color: 'rgba(0,0,0,0.1)'
-                  },
-                  ticks: {
-                      color: '#666'
-                  }
-              }
-          },
-          interaction: {
-              mode: 'nearest',
-              axis: 'x',
-              intersect: false
-          }
-      }
-  });
+ const statisticsChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: monthNames,
+        datasets: [{
+            label: 'Merit Points',
+            data: monthlyData,
+            borderColor: 'rgb(67, 97, 238)',
+            backgroundColor: 'rgba(67, 97, 238, 0.1)',
+            borderWidth: 3,
+            fill: true,
+            tension: 0.4,
+            pointBackgroundColor: 'rgb(67, 97, 238)',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2,
+            pointRadius: 6,
+            pointHoverRadius: 8
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false, // This is crucial!
+        plugins: {
+            legend: {
+                display: true,
+                position: 'top',
+            },
+            tooltip: {
+                mode: 'index',
+                intersect: false,
+                backgroundColor: 'rgba(0,0,0,0.8)',
+                titleColor: '#fff',
+                bodyColor: '#fff',
+                borderColor: 'rgb(67, 97, 238)',
+                borderWidth: 1
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                grid: {
+                    color: 'rgba(0,0,0,0.1)'
+                },
+                ticks: {
+                    color: '#666'
+                }
+            },
+            x: {
+                grid: {
+                    color: 'rgba(0,0,0,0.1)'
+                },
+                ticks: {
+                    color: '#666'
+                }
+            }
+        },
+        interaction: {
+            mode: 'nearest',
+            axis: 'x',
+            intersect: false
+        }
+    }
+});
 
   function exportChart() {
       const link = document.createElement('a');
@@ -333,27 +334,7 @@
       link.click();
   }
 
-  // Add some animation to the cards
-  document.addEventListener('DOMContentLoaded', function() {
-      const cards = document.querySelectorAll('.card');
-      cards.forEach((card, index) => {
-          card.style.opacity = '0';
-          card.style.transform = 'translateY(20px)';
-          card.style.animation = `fadeInUp 0.6s ease-out ${index * 0.1}s forwards`;
-      });
-  });
 
-  // Add CSS animation
-  const style = document.createElement('style');
-  style.textContent = `
-      @keyframes fadeInUp {
-          to {
-              opacity: 1;
-              transform: translateY(0);
-          }
-      }
-  `;
-  document.head.appendChild(style);
   </script>
 
   </body>

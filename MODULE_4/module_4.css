@@ -58,10 +58,7 @@
   gap: 8px;
 }
 
-.btn-filter:hover {
-  background-color: var(--primary-light);
-  transform: translateY(-2px);
-}
+
 
 .merits-grid {
   display: grid;
@@ -76,31 +73,11 @@
   box-shadow: var(--shadow);
   padding: 20px;
   border-left: 4px solid var(--primary);
-  transition: all 0.3s;
-  position: relative;
-  overflow: hidden;
+
 }
 
-.merit-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-}
 
-.merit-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--primary), var(--primary-light));
-  transform: scaleX(0);
-  transition: transform 0.3s;
-}
 
-.merit-card:hover::before {
-  transform: scaleX(1);
-}
 
 .merit-header {
   display: flex;
@@ -217,31 +194,10 @@
   transition: all 0.3s;
 }
 
-.stat-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(67, 97, 238, 0.3);
-}
 
-.stat-card::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  right: -50%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-  transform: rotate(45deg);
-  transition: all 0.6s;
-}
 
-.stat-card:hover::before {
-  animation: shimmer 0.6s ease-out;
-}
 
-@keyframes shimmer {
-  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-}
+
 
 .stat-number {
   font-size: 2.5rem;
@@ -271,99 +227,3 @@
   color: var(--primary);
 }
 
-/* Loading states */
-.loading {
-  opacity: 0.6;
-  pointer-events: none;
-}
-
-.loading::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 20px;
-  height: 20px;
-  margin: -10px 0 0 -10px;
-  border: 2px solid var(--primary);
-  border-radius: 50%;
-  border-top-color: transparent;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  .filter-row {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  
-  .filter-group {
-    width: 100%;
-  }
-  
-  .summary-stats {
-    grid-template-columns: 1fr;
-  }
-  
-  .merits-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .merit-header {
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .merit-points {
-    align-self: flex-start;
-  }
-  
-  .merit-meta {
-    flex-direction: column;
-    gap: 10px;
-    align-items: flex-start;
-  }
-}
-
-@media (max-width: 480px) {
-  .merit-card {
-    padding: 15px;
-  }
-  
-  .stat-card {
-    padding: 20px;
-  }
-  
-  .stat-number {
-    font-size: 2rem;
-  }
-  
-  .filter-section {
-    padding: 15px;
-  }
-}
-
-/* Print styles */
-@media print {
-  .filter-section,
-  .header-actions {
-    display: none;
-  }
-  
-  .merit-card {
-    break-inside: avoid;
-    box-shadow: none;
-    border: 1px solid #ddd;
-  }
-  
-  .stat-card {
-    background: white !important;
-    color: var(--text-dark) !important;
-    border: 1px solid #ddd;
-  }
-}
