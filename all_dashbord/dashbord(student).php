@@ -154,7 +154,7 @@
           <?php if (!empty($student_info['student_qr'])): ?>
             <img src="<?= htmlspecialchars($student_info['student_qr']) ?>" alt="Student QR Code">
           <?php else: ?>
-            <img src="../templet/image/download.png" alt="Default QR Code">
+            <img src="../templet ( use this to match our overview)/image/download.png" alt="Default QR Code">
           <?php endif; ?>
         </div>
         <a href="<?= !empty($student_info['student_qr']) ? $student_info['student_qr'] : '../templet.html' ?>" download class="btn-sm">

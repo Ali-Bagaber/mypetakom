@@ -79,6 +79,7 @@
 
 
 
+
 .merit-header {
   display: flex;
   justify-content: space-between;
@@ -196,9 +197,6 @@
 
 
 
-
-
-
 .stat-number {
   font-size: 2.5rem;
   font-weight: 700;
@@ -227,3 +225,26 @@
   color: var(--primary);
 }
 
+
+.merit-actions {
+  margin-top: 15px;
+}
+
+.btn-details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 12px 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  background-color: var(--primary);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+.btn-details:hover {
+  background-color: var(--primary-light);
+}

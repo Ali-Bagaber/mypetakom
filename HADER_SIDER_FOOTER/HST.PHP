@@ -21,12 +21,29 @@ if (!isset($student_info)) {
 }
 
 // Function to check if menu item is active
+
+// Fixed function to check if menu item is active
 function isActive($page, $dir = '') {
     $current_page = basename($_SERVER['PHP_SELF']);
     $current_dir = basename(dirname($_SERVER['PHP_SELF']));
     
-    if ($dir && $current_dir == $dir) return 'active';
-    if ($current_page == $page) return 'active';
+    // If both directory and page are specified, check both
+    if ($dir && $page) {
+        if ($current_dir == $dir && $current_page == $page) {
+            return 'active';
+        }
+    }
+    // If only directory is specified, check directory
+    elseif ($dir && !$page) {
+        if ($current_dir == $dir) {
+            return 'active';
+        }
+    }
+    // If only page is specified (no directory), check page
+    elseif ($current_page == $page) {
+        return 'active';
+    }
+    
     return '';
 }
 ?>
@@ -46,10 +63,10 @@ function isActive($page, $dir = '') {
     <div class="main-header">
       <div class="logo-header">
         <a href="#" class="logo">
-          <img src="../templet/image/logo-emblem__329x482.png" alt="MyPetakom Logo" />
+          <img src="../templet ( use this to match our overview)/image/logo-emblem__329x482.png" alt="MyPetakom Logo" />
         </a>
-        <a href="../templet/images.png" class="logo">
-            <img src="../templet/image/images.png" alt="MyPetakom Logo">
+        <a href="../templet ( use this to match our overview)/images.png" class="logo">
+            <img src="../templet ( use this to match our overview)/image/images.png" alt="MyPetakom Logo">
         </a>
       </div>
       <div class="nav-actions">
@@ -70,7 +87,7 @@ function isActive($page, $dir = '') {
           <div class="sidebar-content">
             <h4 class="section-title">Student Profile</h4>
             <div class="profile-image-container">
-              <img src="../templet/image/user-icon.webp" alt="Profile Image" class="profile-image">
+              <img src="../templet ( use this to match our overview)/image/user-icon.webp" alt="Profile Image" class="profile-image">
             </div>
             
             <!-- Student Info Display -->
@@ -88,23 +105,23 @@ function isActive($page, $dir = '') {
             </div>
             <?php endif; ?>
             
-            <ul class="sidebar-menu">
-              <li class="menu-item <?= isActive('dashboard.php', 'all_dashbord') ?>">
-                <a href="../all_dashbord/dashboard.php"><i class="fas fa-th-large"></i> Dashboard</a>
-              </li>
-              <li class="menu-item <?= isActive('manage_profile.php', 'profile') ?>">
-                <a href="../profile/manage_profile.php"><i class="fas fa-user-edit"></i> Manage User Profile</a>
-              </li>
-              <li class="menu-item <?= isActive('manage_membership.php', 'membership') ?>">
-                <a href="../membership/manage_membership.php"><i class="fas fa-id-card"></i> Manage Membership</a>
-              </li>
-              <li class="menu-item <?= isActive('VIEW_AWARDED.PHP', 'MODULE_4') ?>">
-                <a href="../MODULE_4/VIEW_AWARDED.PHP"><i class="fas fa-medal"></i> View Awarded Merits</a>
-              </li>
-              <li class="menu-item <?= isActive('manage_claims.php', 'claims') ?>">
-                <a href="../claims/manage_claims.php"><i class="fas fa-clipboard-check"></i> Manage Merits Claims</a>
-              </li>
-            </ul>
+<ul class="sidebar-menu">
+  <li class="menu-item <?= isActive('dashbord(student).php', 'all_dashbord') ?>">
+    <a href="../../mypetakom/all_dashbord/dashbord(student).php"><i class="fas fa-th-large"></i> Dashboard</a>
+  </li>
+  <li class="menu-item <?= isActive('manage_profile.php', 'profile') ?>">
+    <a href="../MODULE_4/Manage_User_Profile.php"><i class="fas fa-user-edit"></i> Manage User Profile</a>
+  </li>
+  <li class="menu-item <?= isActive('manage_membership.php', 'membership') ?>">
+    <a href="../membership/manage_membership.php"><i class="fas fa-id-card"></i> Manage Membership</a>
+  </li>
+  <li class="menu-item <?= isActive('VIEW_AWARDED.PHP', 'MODULE_4') ?>">
+    <a href="../MODULE_4/VIEW_AWARDED.PHP"><i class="fas fa-medal"></i> View Awarded Merits</a>
+  </li>
+  <li class="menu-item <?= isActive('Manage_Merits_Claims.php', 'MODULE_4') ?>">
+    <a href="../MODULE_4/Manage_Merits_Claims.php"><i class="fas fa-clipboard-check"></i> Manage Merits Claims</a>
+  </li>
+</ul>
           </div>
         </div>
       </div>
