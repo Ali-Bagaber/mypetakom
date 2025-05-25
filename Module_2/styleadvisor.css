@@ -5,6 +5,8 @@
 }
 
 body {
+  margin: 0;
+  padding: 0;
   height: 100%;
   overflow: hidden; 
   font-family: sans-serif;
@@ -18,7 +20,7 @@ body {
 
 .sidebar {
   width: 250px;
-  background-color: #12232E;
+  background-color: #12232E; /*biru sidebar*/
   color: white;
   padding: 20px;
   display: flex;
@@ -75,11 +77,35 @@ body {
 }
 
 .top-header {
+  position: relative;
+  background-color: #12232E;
+  color: white;
+  height: 100px;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
-  text-align: center;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
 }
 
+.top-header h1 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 28px;
+  margin: 0;
+}
+
+.top-header .logout {
+  position: absolute;
+  right: 20px;
+  background-color: #DD4B39;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
 .logout {
   background-color: #DD4B39;
   color: white;
@@ -88,6 +114,7 @@ body {
   border-radius: 5px;
   cursor: pointer;
 }
+
 
 .dashboard-header {
   display: flex;
@@ -154,8 +181,8 @@ body {
 }
 
 .table-wrapper {
-  margin-top: 10px;
-  max-height: 150px;
+  margin-top: 20px;
+  max-height: auto;
   overflow-y: auto;
 }
 
