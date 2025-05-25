@@ -23,6 +23,7 @@
 		  <li><a href="dashboard_advisor.php" class="active">Dashboard</a></li>
 		  <li>Manage User Profile</li>
 		  <li><a href="create_event.php">Create New Event</a></li>
+		  <li><a href="create_committee.php">Register Commitee </a></li>
 		  <li><a href="manage_event.php">Manage Events</a></li>
 		  <li><a href="manage_committee.php">Manage Committees</a></li>
 		  <li><a href="merit_approval.php">Merit Application Approval</a></li>
