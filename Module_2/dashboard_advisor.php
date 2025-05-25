@@ -16,7 +16,7 @@
         <img src="ump logo.png" alt="UMP Logo">
         <img src="petakom logo.png" alt="PETAKOM Logo">
       </div>
-      <h2>Advisor Profile</h2>
+      <h2>Event Advisor Profile</h2>
       <div class="profile-pic"></div>
       <nav>
         <ul>
