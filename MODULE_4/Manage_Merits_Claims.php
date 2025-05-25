@@ -279,7 +279,7 @@ include '../HADER_SIDER_FOOTER/HST.PHP';
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Manage Merit Claims – Student Dashboard</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../CSS/Manage_Merits.css">
+  <link rel="stylesheet" href="../CSS/MODULE_4_css/Manage_Merits.css">
 
 </head>
 <body>

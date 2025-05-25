@@ -136,7 +136,7 @@ include '../HADER_SIDER_FOOTER/HST.PHP';
   <title>View Awarded Merits – Student Dashboard</title>
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../CSS/VIEW_AWARDED.css">
+  <link rel="stylesheet" href="../CSS/MODULE_4_css/VIEW_AWARDED.css">
 </head>
 <body>
 

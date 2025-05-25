@@ -56,7 +56,7 @@ if (!$detail) {
   <title>Merit Details – <?= htmlspecialchars($detail['title']) ?></title>
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../CSS/VIEW_AWARDED.css">
+  <link rel="stylesheet" href="../CSS/MODULE_4_css/VIEW_AWARDED.css">
   <style>
     .details-container { 
       max-width:600px; 
