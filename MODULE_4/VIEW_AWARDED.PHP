@@ -124,7 +124,7 @@ while ($r = $all_rs->fetch_assoc()) {
 }
 sort($all_event_levels);
 
-// Include your header/sidebar
+// Include your header/sidebar and footer
 include '../HADER_SIDER_FOOTER/HST.PHP';
 ?>
 
