@@ -312,15 +312,15 @@ include '../HADER_SIDER_FOOTER/HST.PHP';
                 <div class="stat-number"><?= $stats['total_claims'] ?></div>
                 <div class="stat-label">Total Claims</div>
             </div>
-            <div class="stat-card" style="background: linear-gradient(135deg, var(--warning), #ffd93d);">
+            <div class="stat-card" style="background: #ffd93d;">
                 <div class="stat-number"><?= $stats['pending_claims'] ?></div>
                 <div class="stat-label">Pending Claims</div>
             </div>
-            <div class="stat-card" style="background: linear-gradient(135deg, var(--success), #48c78e);">
+            <div class="stat-card" style="background:  #48c78e;">
                 <div class="stat-number"><?= $stats['approved_claims'] ?></div>
                 <div class="stat-label">Approved Claims</div>
             </div>
-            <div class="stat-card" style="background: linear-gradient(135deg, var(--danger), #ff6b9d);">
+            <div class="stat-card" style="background:  #ff6b9d;">
                 <div class="stat-number"><?= $stats['rejected_claims'] ?></div>
                 <div class="stat-label">Rejected Claims</div>
             </div>

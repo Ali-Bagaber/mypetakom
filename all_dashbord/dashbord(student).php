@@ -1,8 +1,24 @@
   <?php
+session_start();
+
+// 1) Only allow logged-in students
+if (
+    !isset($_SESSION['user_id'], $_SESSION['user_role'])
+    || $_SESSION['user_role'] !== 'student'
+) {
+    header("Location: /mypetakom/mypetakom/Module_1/Login.php");
+    exit;
+}
+
+require __DIR__ . '/../../Databased/db_connect.php';
+
+// 2) Pull the real ID from the session
+$user_id = $_SESSION['user_id'];
+  
   include '../../Databased/db_connect.php';
 
-  // Hardcoded user_id for testing (e.g., student with ID = 1)
-  $user_id = 1;
+
+  
 
   // Get total merits for the student
   $total_merits_sql = "SELECT SUM(m.points) as total_points

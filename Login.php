@@ -1,51 +1,66 @@
 <?php
+
 session_start();
-require 'db_connect.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['userID'];  // userID input is actually the username
+// adjust this line:
+require __DIR__ . '/../Databased/db_connect.php';
+
+// rest of your code…
+
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $username = trim($_POST['userID']);
     $password = $_POST['password'];
-    $userRole = $_POST['userType']; // userType from the form maps to user_role in DB
+    $userRole = $_POST['userType'];
 
-    // Query based on username (not user_id)
-    $sql = "SELECT * FROM users WHERE username = ? AND user_role = ?";
+    // Fetch user record
+    $sql  = "SELECT user_id, username, password, user_role 
+               FROM users 
+              WHERE username = ? 
+                AND user_role = ? 
+              LIMIT 1";
     $stmt = $conn->prepare($sql);
-
     if (!$stmt) {
         die("Prepare failed: " . $conn->error);
     }
-
     $stmt->bind_param("ss", $username, $userRole);
     $stmt->execute();
-    $result = $stmt->get_result();
+    $user = $stmt->get_result()->fetch_assoc();
+    $stmt->close();
 
-    if ($result->num_rows === 1) {
-        $user = $result->fetch_assoc();
-
+    if ($user) {
+        // Verify password (hashed)
         if (password_verify($password, $user['password'])) {
-            $_SESSION['username'] = $user['username'];
-            $_SESSION['userRole'] = $user['user_role'];
+            // Regenerate session ID
+            session_regenerate_id(true);
 
-            // Redirect based on user_role (case-sensitive filename fix)
+            // **Set the same session keys your dashboard expects**
+            $_SESSION['user_id']   = $user['user_id'];
+            $_SESSION['username']  = $user['username'];
+            $_SESSION['user_role'] = $user['user_role'];
+            $_SESSION['login_time']= time();
+
+            // Redirect to the correct absolute path
             switch ($user['user_role']) {
                 case 'admin':
-                    header("Location: Admin-Dashboard.php");
-                    exit;
+                    header("Location: /mypetakom/all_dashbord/Admin-Dashboard.php");
+                    break;
                 case 'advisor':
-                    header("Location: dashboard_advisor.php");
-                    exit;
+                    header("Location: /mypetakom/all_dashbord/dashboard_advisor.php");
+                    break;
                 case 'student':
-                    header("Location: dashboard(student).php");
-                    exit;
+                    header("Location: /mypetakom/all_dashbord/dashbord(student).php");
+                    break;
                 default:
-                    echo "Unknown user role.";
-                    exit;
+                    // just in case
+                    header("Location: /mypetakom/Module_1/Login.php");
             }
+            exit;
         } else {
-            echo "<script>alert('Invalid password.'); window.location='login.php';</script>";
+            echo "<script>alert('Invalid password.'); window.location='/mypetakom/Module_1/Login.php';</script>";
         }
     } else {
-        echo "<script>alert('Invalid username or role.'); window.location='login.php';</script>";
+        echo "<script>alert('Invalid username or role.'); window.location='/mypetakom/Module_1/Login.php';</script>";
     }
 }
 ?>
@@ -53,39 +68,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Login Page</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="UTF-8">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="container">
-    <div class="logo-container">
-        <img src="logo1.png" alt="Logo 1" class="logo">
-        <img src="logo2.png" alt="Logo 2" class="logo">
-    </div>
-    <div class="login-box">
-        <div class="tabs">
-            <a href="signup.php" class="tab">Signup</a>
-            <a href="login.php" class="tab active">Login</a>
-        </div>
-        <form action="login.php" method="POST" autocomplete="off" novalidate>
-            <label for="userID">Username:</label>
-            <input type="text" id="userID" name="userID" autocomplete="off" required>
-
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" autocomplete="new-password" required>
-
-            <label for="userType">User Type:</label>
-            <select id="userType" name="userType" autocomplete="off" required>
-                <option value="admin">Admin</option>
-                <option value="advisor">Advisor</option>
-                <option value="student">Student</option>
-            </select>
-
-            <button type="submit" class="login-btn">Login</button>
-            <a href="forgot-password.php" class="forgot-password">Forgot password?</a>
-        </form>
-    </div>
-</div>
+  <!-- ... your form HTML unchanged ... -->
 </body>
 </html>

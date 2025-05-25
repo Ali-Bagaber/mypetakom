@@ -1,5 +1,5 @@
 <?php
-include('db_connect.php');
+include '../../Databased/db_connect.php';
 
 if (isset($_GET['id'])) {
     $event_id = $_GET['id'];

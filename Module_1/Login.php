@@ -1,91 +1,117 @@
 <?php
 session_start();
-require 'db_connect.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['userID'];  // userID input is actually the username
-    $password = $_POST['password'];
-    $userRole = $_POST['userType']; // userType from the form maps to user_role in DB
-
-    // Query based on username (not user_id)
-    $sql = "SELECT * FROM users WHERE username = ? AND user_role = ?";
-    $stmt = $conn->prepare($sql);
-
-    if (!$stmt) {
-        die("Prepare failed: " . $conn->error);
-    }
-
-    $stmt->bind_param("ss", $username, $userRole);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows === 1) {
-        $user = $result->fetch_assoc();
-
-        if (password_verify($password, $user['password'])) {
-            $_SESSION['username'] = $user['username'];
-            $_SESSION['userRole'] = $user['user_role'];
-
-            // Redirect based on user_role (case-sensitive filename fix)
-            switch ($user['user_role']) {
-                case 'admin':
-                    header("Location: Admin-Dashboard.php");
-                    exit;
-                case 'advisor':
-                    header("Location: Advisor-Dashboard.php");
-                    exit;
-                case 'student':
-                    header("Location: Student-Dashboard.php");
-                    exit;
-                default:
-                    echo "Unknown user role.";
-                    exit;
-            }
-        } else {
-            echo "<script>alert('Invalid password.'); window.location='login.php';</script>";
-        }
-    } else {
-        echo "<script>alert('Invalid username or role.'); window.location='login.php';</script>";
+// If user is already logged in, redirect…
+if (isset($_SESSION['user_id'], $_SESSION['user_role'])) {
+    switch ($_SESSION['user_role']) {
+        case 'admin':
+            header("Location: /mypetakom/mypetakom/all_dashbord/Admin-Dashboard.php");
+            exit;
+        case 'advisor':
+            header("Location: /mypetakom/mypetakom/all_dashbord/dashboard_advisor.php");
+            exit;
+        case 'student':
+            header("Location: /mypetakom/mypetakom/all_dashbord/dashbord(student).php");
+            exit;
     }
 }
+
+include '../../Databased/db_connect.php';
+
+$error = '';
+
+// Handle login form
+if ($_SERVER['REQUEST_METHOD']==='POST' && isset($_POST['login'])) {
+    $username  = trim($_POST['username']);
+    $password  = $_POST['password'];
+    $user_type = $_POST['user_type'];
+
+    if ($username==='' || $password==='' || $user_type==='') {
+        $error = "All fields are required.";
+    } else {
+        $stmt = $conn->prepare(
+          "SELECT user_id, username, password, user_role 
+             FROM users 
+            WHERE username = ? AND user_role = ? 
+            LIMIT 1"
+        );
+        $stmt->bind_param("ss", $username, $user_type);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows===1) {
+            $user = $result->fetch_assoc();
+
+            // detect hashed vs plain‐text
+            if (password_get_info($user['password'])['algo']) {
+                $valid = password_verify($password, $user['password']);
+            } else {
+                $valid = $password === $user['password'];
+                if ($valid) {
+                    // re-hash for security
+                    $hp = password_hash($password, PASSWORD_DEFAULT);
+                    $u = $conn->prepare("UPDATE users SET password=? WHERE user_id=?");
+                    $u->bind_param("si",$hp,$user['user_id']);
+                    $u->execute();
+                    $u->close();
+                }
+            }
+
+            if ($valid) {
+                $_SESSION['user_id']   = $user['user_id'];
+                $_SESSION['username']  = $user['username'];
+                $_SESSION['user_role'] = $user['user_role'];
+
+                // **REMOVED** login_logs insert
+
+                // redirect
+                switch ($user['user_role']) {
+                    case 'admin':
+                        header("Location: /mypetakom/mypetakom/all_dashbord/Admin-Dashboard.php");
+                        break;
+                    case 'advisor':
+                        header("Location: /mypetakom/mypetakom/all_dashbord/dashboard_advisor.php");
+                        break;
+                    case 'student':
+                        header("Location: /mypetakom/mypetakom/all_dashbord/dashbord(student).php");
+                        break;
+                }
+                exit;
+            } else {
+                $error = "Invalid username or password.";
+            }
+        } else {
+            $error = "Invalid username or user type.";
+        }
+        $stmt->close();
+    }
+}
+
+$conn->close();
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Login Page</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="UTF-8">
+  <title>PETAKOM Login System</title>
+  <link rel="stylesheet" href="../CSS/MODULE_1_css/login.css">
+  <!-- your styles here… -->
 </head>
 <body>
-<div class="container">
-    <div class="logo-container">
-        <img src="logo1.png" alt="Logo 1" class="logo">
-        <img src="logo2.png" alt="Logo 2" class="logo">
-    </div>
-    <div class="login-box">
-        <div class="tabs">
-            <a href="signup.php" class="tab">Signup</a>
-            <a href="login.php" class="tab active">Login</a>
-        </div>
-        <form action="login.php" method="POST" autocomplete="off" novalidate>
-            <label for="userID">Username:</label>
-            <input type="text" id="userID" name="userID" autocomplete="off" required>
-
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" autocomplete="new-password" required>
-
-            <label for="userType">User Type:</label>
-            <select id="userType" name="userType" autocomplete="off" required>
-                <option value="admin">Admin</option>
-                <option value="advisor">Advisor</option>
-                <option value="student">Student</option>
-            </select>
-
-            <button type="submit" class="login-btn">Login</button>
-            <a href="forgot-password.php" class="forgot-password">Forgot password?</a>
-        </form>
-    </div>
-</div>
+  <?php if ($error): ?>
+    <div class="error-message"><?= htmlspecialchars($error) ?></div>
+  <?php endif; ?>
+  <form method="POST">
+    <input name="username"  placeholder="Username" value="<?=htmlspecialchars($_POST['username'] ?? '')?>">
+    <input name="password"  type="password" placeholder="Password">
+    <select name="user_type">
+      <option value="">-- Select Role --</option>
+      <option value="student">Student</option>
+      <option value="advisor">Event Advisor</option>
+      <option value="admin">PETAKOM Admin</option>
+    </select>
+    <button name="login">Login</button>
+  </form>
 </body>
 </html>

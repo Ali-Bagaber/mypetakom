@@ -73,9 +73,10 @@ function isActive($page, $dir = '') {
         <div class="notification-icon">
           <i class="fas fa-bell"></i>
         </div>
-        <a href="../login/logout.php" class="btn-logout">
+      <a href="../Module_1/logout.php" class="btn-logout">
           <i class="fas fa-sign-out-alt"></i> Logout
-        </a>
+      </a>
+
       </div>
     </div>
 
@@ -125,3 +126,6 @@ function isActive($page, $dir = '') {
           </div>
         </div>
       </div>
+
+
+      
