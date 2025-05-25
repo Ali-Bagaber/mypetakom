@@ -1,5 +1,8 @@
 <?php
 // advisor_dashboard.php
+
+  include '../../mypetakom/HADER_SIDER_FOOTER/HST.PHP';
+
 ?>
 
 <!DOCTYPE html>
@@ -11,26 +14,7 @@
 </head>
 <body>
   <div class="container">
-    <aside class="sidebar">
-      <div class="logos">
-        <img src="ump logo.png" alt="UMP Logo">
-        <img src="petakom logo.png" alt="PETAKOM Logo">
-      </div>
-      <h2>Advisor Profile</h2>
-      <div class="profile-pic"></div>
-      <nav>
-        <ul>
-		  <li><a href="dashboard_advisor.php" class="active">Dashboard</a></li>
-		  <li>Manage User Profile</li>
-		  <li><a href="create_event.php">Create New Event</a></li>
-		  <li><a href="manage_event.php">Manage Events</a></li>
-		  <li><a href="manage_committee.php">Manage Committees</a></li>
-		  <li><a href="merit_approval.php">Merit Application Approval</a></li>
-		  <li><a href="event_qr.php">Event QR Code</a></li>
-		</ul>
 
-      </nav>
-    </aside>
 
     <main class="main-content">
       <header class="top-header">

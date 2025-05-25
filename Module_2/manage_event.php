@@ -76,7 +76,7 @@ $result = $conn->query($sql);
                             echo "<td class='" . strtolower($row['event_status']) . "-status'>" . htmlspecialchars($row['event_status']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['start_date']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['end_date']) . "</td>";
-                            
+                            echo "<td>" . htmlspecialchars($row['location']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['geographic_location']) . "</td>";
                             echo "<td>
 								<a href='edit_event.php?id=" . $row['event_id'] . "' class='edit-btn'>Edit</a>

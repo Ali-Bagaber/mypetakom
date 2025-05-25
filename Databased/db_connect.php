@@ -1,7 +1,7 @@
 <?php
 $host = "localhost";
-$username = "admin";
-$password = "1234";
+$username = "root";
+$password = "";
 $database = "mypetakom"; 
 
 $conn = new mysqli($host, $username, $password, $database);

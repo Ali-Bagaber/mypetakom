@@ -180,7 +180,7 @@
 .empty-state {
   text-align: center;
   padding: 60px 20px;
-
+  color: var(--text-light);
 }
 
 .empty-state i {
@@ -192,7 +192,7 @@
 .empty-state h3 {
   font-size: 1.3rem;
   margin-bottom: 10px;
-
+  color: var(--text-dark);
 }
 
 .empty-state p {
@@ -269,7 +269,7 @@
   background: none;
   cursor: pointer;
   font-weight: 500;
-
+  color: var(--text-light);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -281,6 +281,8 @@
 
 .tab-btn.active {
   background-color: white;
+  color: var(--primary);
+  border-bottom-color: var(--primary);
 }
 
 .tab-content {
@@ -311,6 +313,9 @@
 
 
 
+.event-card.claimable {
+  border-left-color: var(--warning);
+}
 
 .event-header {
   display: flex;
@@ -322,11 +327,14 @@
 .event-title {
   font-size: 1.1rem;
   font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1.4;
   flex: 1;
   margin-right: 10px;
 }
 
 .event-level {
+  background-color: var(--primary);
   color: white;
   padding: 4px 10px;
   border-radius: 12px;
@@ -336,6 +344,7 @@
 }
 
 .event-details {
+  color: var(--text-light);
   font-size: 0.9rem;
   line-height: 1.6;
   margin-bottom: 15px;
@@ -347,6 +356,7 @@
 
 .event-details i {
   margin-right: 8px;
+  color: var(--primary);
   width: 16px;
 }
 
@@ -359,6 +369,7 @@
 }
 
 .btn-claim {
+  background-color: var(--warning);
   color: white;
   padding: 8px 16px;
   border: none;
@@ -386,7 +397,17 @@
   transition: all 0.3s;
 }
 
+.claim-card.approved {
+  border-left-color: var(--success);
+}
 
+.claim-card.rejected {
+  border-left-color: var(--danger);
+}
+
+.claim-card.pending {
+  border-left-color: var(--warning);
+}
 
 .claim-header {
   display: flex;
@@ -398,13 +419,19 @@
 .claim-title {
   font-size: 1.1rem;
   font-weight: 600;
+  color: var(--text-dark);
   line-height: 1.4;
   margin-bottom: 5px;
 }
 
+.claim-meta {
+  color: var(--text-light);
+  font-size: 0.85rem;
+}
 
 .claim-date i {
   margin-right: 5px;
+  color: var(--primary);
 }
 
 .claim-status-badge {
@@ -437,6 +464,7 @@
 }
 
 .claim-details {
+  color: var(--text-light);
   font-size: 0.9rem;
   line-height: 1.6;
   margin-bottom: 15px;
@@ -448,7 +476,13 @@
 
 .claim-details i {
   margin-right: 8px;
+  color: var(--primary);
   width: 16px;
+}
+
+.claim-details a {
+  color: var(--primary);
+  text-decoration: none;
 }
 
 
@@ -478,6 +512,7 @@
 
 
 .btn-delete {
+  background-color: var(--danger);
   color: white;
 }
 
@@ -505,6 +540,8 @@
   width: 90%;
   max-width: 500px;
   max-height: 90vh;
+  overflow-y: auto;
+  animation: modalSlideIn 0.3s ease-out;
 }
 
 

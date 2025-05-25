@@ -1,3 +1,9 @@
+<?php 
+include '../../Databased/db_connect.php';
+
+include '../HADER_SIDER_FOOTER/HST.PHP';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

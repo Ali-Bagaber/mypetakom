@@ -70,7 +70,7 @@
   position: absolute;
   top: 50%; left: 12px;
   transform: translateY(-50%);
-
+  color: var(--text-light);
 }
 .search-bar input {
   width: 100%;
@@ -292,9 +292,7 @@
 .modal-header h3 {
   margin: 0;
   font-size: 1.2rem;
-  
-
-
+  color: var(--text-dark);
 }
 .modal-header .close {
   font-size: 1.5rem;

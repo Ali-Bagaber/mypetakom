@@ -10,7 +10,7 @@ if (
     exit;
 }
 
-require __DIR__ . '/../../Databased/db_connect.php';
+
 
 // 2) Pull the real ID from the session
 $user_id = $_SESSION['user_id'];
