@@ -1,6 +1,5 @@
 <?php
-include '../../Databased/db_connect.php';
-
+include('db_connect.php');
 // Optional: use session to get current user's ID if needed
 // session_start();
 // $user_id = $_SESSION['user_id'];
@@ -17,12 +16,13 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styleadvisor.css">
     <title>Manage Events</title>
+	<link rel="stylesheet" href="styleadvisor.css">
 </head>
 <body>
 
 <div class="container">
+	<!-- Sidebar -->
     <div class="sidebar">
         <div class="logos">
             <img src="ump logo.png" alt="UMP Logo">
@@ -34,6 +34,7 @@ $result = $conn->query($sql);
             <li><a href="dashboard_advisor.php">Dashboard</a></li>
             <li>Manage User Profile</li>
             <li><a href="create_event.php">Create New Event</a></li>
+			<li><a href="create_committee.php">Register Commitee </a></li>
             <li><a href="manage_event.php" class="active">Manage Events</a></li>
             <li><a href="manage_committee.php">Manage Committees</a></li>
             <li><a href="merit_approval.php">Merit Application Approval</a></li>
@@ -41,14 +42,16 @@ $result = $conn->query($sql);
         </ul>
     </div>
 
+
+        <!-- Main Content -->
     <div class="main-content">
         <div class="top-header">
             <h1>MyPetakom System</h1>
             <button class="logout">Log Out</button>
         </div>
-
+	
         <h2>Manage Events</h2>
-		
+		<div class="table-wrapper">
         <div class="event-list">
             <table>
                 <thead>
@@ -79,8 +82,8 @@ $result = $conn->query($sql);
                             echo "<td>" . htmlspecialchars($row['location']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['geographic_location']) . "</td>";
                             echo "<td>
-								<a href='edit_event.php?id=" . $row['event_id'] . "' class='edit-btn'>Edit</a>
-								<a href='delete_event.php?id=" . $row['event_id'] . "' class='delete-btn' onclick=\"return confirm('Are you sure you want to delete this event?');\">Delete</a>
+								<a href='edit_event.php?id=" . $row['event_id'] . "'><button>Edit</button>
+								<a href='delete_event.php?id=" . $row['event_id'] . "'><button>Delete</button>
 							  </td>";
 
 
@@ -94,9 +97,7 @@ $result = $conn->query($sql);
             </table>
         </div>
         
-        <div style="text-align:right;">
-            <button type="submit" name="submit" class="logout" style="background-color:green;">Submit</button>
-        </div>
+       
     </div>
 </div>
 

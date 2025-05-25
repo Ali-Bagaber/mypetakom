@@ -1,6 +1,44 @@
 <?php
-// advisor_dashboard.php
+include('db_connect.php');
+
+// Fetch only upcoming events
+$sql = "SELECT * FROM events WHERE start_date >= CURDATE() ORDER BY start_date ASC";
+$result = $conn->query($sql);
+
+// Fetch recent committees and join with events to show event name
+$sql_committees = "SELECT ec.committee_id, ec.role, e.title AS event_title, u.name AS student_name
+                   FROM eventcommittee ec
+                   JOIN events e ON ec.event_id = e.event_id
+                   JOIN users u ON ec.user_id = u.user_id
+                   ORDER BY ec.committee_id DESC 
+                   LIMIT 5";
+
+
+$result_committees = $conn->query($sql_committees);
+
+// Total events
+$sql_total_events = "SELECT COUNT(*) AS total FROM events";
+$total_events = $conn->query($sql_total_events)->fetch_assoc()['total'];
+
+// Active events
+$sql_active_events = "SELECT COUNT(*) AS total FROM events WHERE event_status = 'Active'";
+$active_events = $conn->query($sql_active_events)->fetch_assoc()['total'];
+
+// Postponed/Cancelled events
+$sql_postponed_events = "SELECT COUNT(*) AS total FROM events WHERE event_status IN ('Postponed', 'Cancelled')";
+$postponed_events = $conn->query($sql_postponed_events)->fetch_assoc()['total'];
+
+// Total committees
+$sql_total_committees = "SELECT COUNT(*) AS total FROM eventcommittee";
+$total_committees = $conn->query($sql_total_committees)->fetch_assoc()['total'];
+
+// Merit Applications
+$sql_merit_applications = "SELECT COUNT(*) AS total FROM meritapplication";
+$merit_applications = $conn->query($sql_merit_applications)->fetch_assoc()['total'];
+
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +54,7 @@
         <img src="ump logo.png" alt="UMP Logo">
         <img src="petakom logo.png" alt="PETAKOM Logo">
       </div>
-      <h2>Advisor Profile</h2>
+      <h2>Event Advisor Profile</h2>
       <div class="profile-pic"></div>
       <nav>
         <ul>
@@ -45,12 +83,13 @@
       </section>
 
       <section class="stats">
-        <div class="card">Total Events<br><span>10</span></div>
-        <div class="card">Active Events<br><span>7</span></div>
-        <div class="card">Postponed/Cancelled<br><span>3</span></div>
-        <div class="card">Total Committees<br><span>25</span></div>
-        <div class="card">Merit Application<br><span>5</span></div>
-      </section>
+		  <div class="card">Total Events<br><span><?php echo $total_events; ?></span></div>
+		  <div class="card">Active Events<br><span><?php echo $active_events; ?></span></div>
+		  <div class="card">Postponed/Cancelled<br><span><?php echo $postponed_events; ?></span></div>
+		  <div class="card">Total Committees<br><span><?php echo $total_committees; ?></span></div>
+		  <div class="card">Merit Application<br><span><?php echo $merit_applications; ?></span></div>
+	  </section>
+
 
       <section class="content">
         <div class="charts">
@@ -63,31 +102,72 @@
         <div class="short-list">
           <h3>Short List</h3>
           <div class="table-wrapper">
-            <h4>Upcoming Events</h4>
-            <table>
-              <thead>
-                <tr>
-                  <th>Event Name</th><th>Date</th><th>Time</th><th>Location</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td>FK Career Talk</td><td>10/05/2025</td><td>10:00 AM</td><td>DK1</td></tr>
-                <tr><td>Hackathon 2025</td><td>12/05/2025</td><td>09:00 AM</td><td>Astaka FK</td></tr>
-              </tbody>
-            </table>
+            <!-- Upcoming Events Section -->
+			<h4>Upcoming Events</h4>
+				<table>
+					<thead>
+						<tr>
+							<th>No</th>
+							<th>Event Name</th>
+							<th>Status</th>
+							<th>Start Date</th>
+							<th>Location</th>
+							
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+						if ($result && $result->num_rows > 0) {
+							$no = 1;
+							while ($row = $result->fetch_assoc()) {
+								echo "<tr>";
+								echo "<td>" . $no++ . "</td>";
+								echo "<td>" . htmlspecialchars($row['title']) . "</td>";
+								echo "<td class='" . strtolower($row['event_status']) . "-status'>" . htmlspecialchars($row['event_status']) . "</td>";
+								echo "<td>" . htmlspecialchars($row['start_date']) . "</td>";
+								echo "<td>" . htmlspecialchars($row['location']) . "</td>";
+								
+								echo "</tr>";
+							}
+						} else {
+							echo "<tr><td colspan='8'>No upcoming events found.</td></tr>";
+						}
+						?>
+					</tbody>
+				</table>
 
-            <h4>Committee List</h4>
-            <table>
-              <thead>
-                <tr>
-                  <th>Student ID</th><th>Name</th><th>Position</th><th>Update</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td>CB23048</td><td>Hatin Nazirah</td><td>Chairperson</td><td><a href="#">edit</a></td></tr>
-                <tr><td>CB23088</td><td>Nur Adilah</td><td>Secretary</td><td><a href="#">edit</a></td></tr>
-              </tbody>
-            </table>
+			<!-- Committee List Section -->
+			<div class="table-wrapper">
+			<h4>Committee List</h4>
+			<table>
+				<thead>
+					<tr>
+						<th>No</th>
+						<th>Name</th>
+						<th>Role</th>
+						<th>Event</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+					if ($result_committees && $result_committees->num_rows > 0) {
+						$no = 1;
+						while ($row = $result_committees->fetch_assoc()) {
+							echo "<tr>";
+							echo "<td>" . $no++ . "</td>";
+							echo "<td>" . htmlspecialchars($row['student_name']) . "</td>";
+							echo "<td>" . htmlspecialchars($row['role']) . "</td>";
+							echo "<td>" . htmlspecialchars($row['event_title']) . "</td>";
+							echo "</tr>";
+						}
+					} else {
+						echo "<tr><td colspan='4'>No committee data found.</td></tr>";
+					}
+					?>
+				</tbody>
+			</table>
+
+
           </div>
         </div>
       </section>
