@@ -17,22 +17,22 @@ $result = $conn->query($sql);
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-	<?php
-	  if (isset($_GET['msg'])) {
-		  if ($_GET['msg'] == 'deleted') {
-			  echo "<script>alert('User deleted successfully.');</script>";
-		  } elseif ($_GET['msg'] == 'updated') {
-			  echo "<script>alert('User updated successfully.');</script>";
-		  }
-	  }
-	  ?>
+  <?php
+  if (isset($_GET['msg'])) {
+      if ($_GET['msg'] == 'deleted') {
+          echo "<script>alert('User deleted successfully.');</script>";
+      } elseif ($_GET['msg'] == 'updated') {
+          echo "<script>alert('User updated successfully.');</script>";
+      }
+  }
+  ?>
   <div class="header">
     <div class="logo-section">
       <img src="Logo1.png" alt="UMP Logo" class="logo" />
       <img src="Logo2.png" alt="Petakom Logo" class="logo" />
     </div>
-	<h1 class="white-text" style="color: white;">Petakom Coordinator (Administrator)</h1>
-    <a href="#" class="logout-button">Log Out</a>
+    <h1 class="white-text" style="color: white;">Petakom Coordinator (Administrator)</h1>
+    <a href="login.php" class="logout-button" id="logoutButton">Log Out</a>
   </div>
 
   <div class="main-container">
@@ -80,11 +80,10 @@ $result = $conn->query($sql);
                           <td>{$row['email']}</td>
                           <td>{$row['user_role']}</td>
                           <td>
-							  <a class='view-btn' href='Admin-ViewUser.php?id={$row['user_id']}'>View</a>
-							  <a class='edit-btn' href='Admin-EditUser.php?id={$row['user_id']}'>Edit</a>
-							  <a class='delete-btn' href='Admin-DeleteUser.php?id={$row['user_id']}' onclick='return confirm(\'Are you sure you want to delete this user?\');'>Delete</a>
-						  </td>
-
+                            <a class='view-btn' href='Admin-ViewUser.php?id={$row['user_id']}'>View</a>
+                            <a class='edit-btn' href='Admin-EditUser.php?id={$row['user_id']}'>Edit</a>
+                            <a class='delete-btn' href='Admin-DeleteUser.php?id={$row['user_id']}' onclick='return confirm(\"Are you sure you want to delete this user?\");'>Delete</a>
+                          </td>
                       </tr>";
                   }
               } else {
@@ -93,30 +92,21 @@ $result = $conn->query($sql);
               ?>
             </tbody>
           </table>
-
-          <script>
-            function viewProfile(userId) {
-              alert("View profile for user ID: " + userId);
-              // window.location.href = "viewUser.php?id=" + userId;
-            }
-
-            function editUser(userId) {
-              alert("Edit user ID: " + userId);
-              // window.location.href = "editUser.php?id=" + userId;
-            }
-
-            function deleteUser(userId) {
-              if (confirm("Are you sure you want to delete user ID " + userId + "?")) {
-                alert("User " + userId + " deleted (backend logic needed).");
-                // window.location.href = "deleteUser.php?id=" + userId;
-              }
-            }
-          </script>
-
         </div>
       </div>
     </div>
   </div>
+
+  <!-- JavaScript -->
+  <script>
+    document.getElementById('logoutButton').addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent immediate navigation
+      const confirmLogout = confirm("Are you sure you want to log out?");
+      if (confirmLogout) {
+        window.location.href = 'Login.php'; // Redirect to logout handler
+      }
+    });
+  </script>
 </body>
 </html>
 

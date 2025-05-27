@@ -25,7 +25,7 @@ if (isset($_GET['id'])) {
       <img src="Logo1.png" alt="UMP Logo" class="logo">
       <img src="Logo2.png" alt="Petakom Logo" class="logo">
     </div>
-    <h1 class="white-text">Petakom Coordinator (Administrator)</h1>
+	<h1 class="white-text" style="color: white;">Petakom Coordinator (Administrator)</h1>
     <a href="logout.php" id="logoutButton" class="logout-button">Log Out</a>
   </div>
 

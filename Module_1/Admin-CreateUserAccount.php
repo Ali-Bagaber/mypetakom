@@ -1,6 +1,7 @@
 <?php
 include('db_connect.php');
 
+
 // Check connection
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
@@ -20,11 +21,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $stmt->bind_param("sssss", $fullname, $username, $email, $password, $role);
 
   if ($stmt->execute()) {
-    echo "<script>alert('User account created successfully.');</script>";
-  } else {
-    echo "<script>alert('Error: " . $stmt->error . "');</script>";
-  }
-
+	echo '<script type="text/javascript">
+		alert("User account created successfully.");
+		window.location.href = "Admin-CreateUserAccount.php";
+  </script>';
+	} else {
+		echo '<script type="text/javascript">
+		alert("Error: ' . addslashes($stmt->error) . '");
+  </script>';
+	}
   $stmt->close();
 }
 ?>
