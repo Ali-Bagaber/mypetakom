@@ -10,6 +10,8 @@ if (
     exit;
 }
 
+
+
 // 2️ Look up the real user_id from the DB
 $stmt = $conn->prepare("SELECT user_id FROM users WHERE username = ?");
 $stmt->bind_param("s", $_SESSION['username']);
@@ -120,6 +122,7 @@ $user_id = $row['user_id'];
 
   // Include header and sidebar
   include '../HADER_SIDER_FOOTER/HST.PHP';
+  include '../MODULE_4/inser_merit.php';
   ?>
 
 

@@ -1,9 +1,25 @@
 <?php
-session_start(); // Add this at the very top
+session_start();
 include '../../Databased/db_connect.php';
 
-// Get user_id from session (instead of hardcoded)
-$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 1; // Fallback to 1 for testing
+// 1) Auth + look up real user_id
+if (
+    !isset($_SESSION['username'], $_SESSION['userRole']) ||
+    $_SESSION['userRole'] !== 'student'
+) {
+    header("Location: ../Module_1/Login.php");
+    exit;
+}
+$stmt = $conn->prepare("SELECT user_id FROM users WHERE username = ?");
+$stmt->bind_param("s", $_SESSION['username']);
+$stmt->execute();
+$res = $stmt->get_result();
+if ($res->num_rows !== 1) {
+    header("Location: ../Module_1/Login.php");
+    exit;
+}
+$user_id = $res->fetch_assoc()['user_id'];
+$stmt->close();
 
 // Handle form submissions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
