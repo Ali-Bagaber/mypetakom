@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     header("Location: ../all_dashbord/dashboard_advisor.php");
                     exit;
                 case 'student':
-                    header("Location: ../all_dashbord/dashbord(student).php");
+                    header("Location: ../all_dashbord/dashboard_student.php");
                     exit;
                 default:
                     echo "Unknown user role.";
