@@ -7,6 +7,7 @@ if ($conn->connect_error) {
 
 $sql = "SELECT * FROM users";
 $result = $conn->query($sql);
+
 ?>
 
 <!DOCTYPE html>
@@ -25,33 +26,13 @@ $result = $conn->query($sql);
           echo "<script>alert('User updated successfully.');</script>";
       }
   }
+
+    include '../HADER_SIDER_FOOTER/HST.PHP';
   ?>
-  <div class="header">
-    <div class="logo-section">
-      <img src="../templet ( use this to match our overview)/image/logo-emblem__329x482.png" alt="UMP Logo" class="logo" />
-      <img src="../templet ( use this to match our overview)/image/images.png" alt="Petakom Logo" class="logo" />
-    </div>
-    <h1 class="white-text" style="color: white;">Petakom Coordinator (Administrator)</h1>
-    <a href="login.php" class="logout-button" id="logoutButton">Log Out</a>
-  </div>
+  
 
   <div class="main-container">
-    <div class="sidebar">
-      <div class="profile">
-        <h3>Admin Profile</h3>
-        <img src="../templet ( use this to match our overview)/image/user-icon.webp" alt="Admin Profile" class="profile-img" />
-      </div>
-      <hr style="margin: 10px 0; border: 0; border-top: 1px solid #000;">
-      <ul class="menu" style="list-style-type: none; padding: 0; margin: 0;">
-        <li><a href="../Module_1/Admin-Dashboard.php">Dashboard</a></li>
-        <hr style="margin: 10px 0; border: 0; border-top: 1px solid #000;">
-        <li><a href="../Module_1/Admin-CreateUserAccount.php">Create User Account</a></li>
-        <hr style="margin: 10px 0; border: 0; border-top: 1px solid #000;">
-        <li class="active">Manage User Profiles</li>
-        <hr style="margin: 10px 0; border: 0; border-top: 1px solid #000;">
-        <li><a href="../Module_1/Admin-ManageMembership.php">Manage Membership</a></li>
-      </ul>
-    </div>
+   
 
     <div class="dashboard">
       <div class="container">

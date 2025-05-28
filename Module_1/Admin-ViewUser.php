@@ -10,6 +10,7 @@ if (isset($_GET['id'])) {
     $result = $stmt->get_result();
     $user = $result->fetch_assoc();
 }
+  include '../HADER_SIDER_FOOTER/HST.PHP';
 ?>
 
 <!DOCTYPE html>
@@ -20,34 +21,10 @@ if (isset($_GET['id'])) {
   <link rel="stylesheet" href="../CSS/MODULE_1_css/style.css">
 </head>
 <body>
-  <div class="header">
-    <div class="logo-section">
-      <img src="../templet ( use this to match our overview)/image/logo-emblem__329x482.png" alt="UMP Logo" class="logo">
-      <img src="../templet ( use this to match our overview)/image/images.png" alt="Petakom Logo" class="logo">
-    </div>
-	<h1 class="white-text" style="color: white;">Petakom Coordinator (Administrator)</h1>
-    <a href="logout.php" id="logoutButton" class="logout-button">Log Out</a>
-  </div>
+  
 
   <div class="main-container">
-    <!-- Sidebar -->
-    <div class="sidebar" style="border: 1px solid #000; padding: 10px;">
-      <div class="profile">
-        <h3>Admin Profile</h3>
-        <img src="../templet ( use this to match our overview)/image/user-icon.webp" alt="Admin Profile" class="profile-img" />
-      </div>
-      <hr>
-      <ul class="menu" style="list-style-type: none; padding: 0;">
-        <li><a href="Admin-Dashboard.php">Dashboard</a></li>
-        <hr>
-        <li><a href="Admin-CreateUserAccount.php">Create User Account</a></li>
-        <hr>
-        <li><a href="Admin-ManageUserProfiles.php">Manage User Profiles</a></li>
-        <hr>
-        <li><a href="Admin-ManageMembership.php">Manage Membership</a></li>
-      </ul>
-    </div>
-
+   
     <!-- Main Content -->
 	<div class="content" style="flex-grow: 1; padding: 20px; background-color: #ffffff; border-radius: 8px; margin: 20px;">
 		<h2>User Details</h2>

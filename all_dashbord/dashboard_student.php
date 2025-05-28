@@ -119,7 +119,7 @@ $user_id = $row['user_id'];
   $page_title = "Student Dashboard";
 
   // Include header and sidebar
-  include '../../mypetakom-1/HADER_SIDER_FOOTER/HST.PHP';
+  include '../HADER_SIDER_FOOTER/HST.PHP';
   ?>
 
 

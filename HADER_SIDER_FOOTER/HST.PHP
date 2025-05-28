@@ -90,25 +90,23 @@ function isActive($page, $dir = '') {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= isset($page_title) ? $page_title : 'Student Dashboard' ?> – <?= htmlspecialchars($student_info['student_name'] ?? 'Student') ?></title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../HADER_SIDER_FOOTER/HST_CSS">
+  <link rel="stylesheet" href="../HADER_SIDER_FOOTER/HST_css">
 
   <style>
     /* push the body content below the fixed header and beside the sidebar */
 .dashboard {
   flex: 1;
+  padding: 30px;
+  background-color: var(--bg-light);
+  min-height: calc(100vh - 90px);
+}
+.main-container {
   margin-left: 280px;
   padding: 30px;
   background-color: var(--bg-light);
   min-height: calc(100vh - 90px);
 }
 
-  .main-contenter {
-  flex: 1;
-  margin-left: 280px;
-  padding: 30px;
-  background-color: var(--bg-light);
-  min-height: calc(100vh - 90px);
-}
   </style>
 
 
@@ -163,12 +161,21 @@ function isActive($page, $dir = '') {
                       <li class="menu-item <?= isActive('Manage_User_Profile.php','MODULE_4') ?>">
                         <a href="../MODULE_4/Manage_User_Profile.php"><i class="fas fa-user-edit"></i> Manage Profile</a>
                       </li>
-                      <li class="menu-item <?= isActive('Manage_Merits_Claims.php','MODULE_4') ?>">
+
+                         <li class="menu-item <?= isActive('../Module_3/Module_3/view.php', 'module_3') ?>">
+                           <a href="../Module_3/Module_3/view.php"><i class="fas fa-camera""></i> scan Attendanc</a>
+                         </li>
+                           <li class="menu-item <?= isActive('../Module_3/Module_3/historyatd.php', 'module_3') ?>">
+                              <a href="../Module_3/Module_3/historyatd.php"><i class="fas fa-qrcode"></i> Attendant History</a>
+                           </li>
+
+                       <li class="menu-item <?= isActive('Manage_Merits_Claims.php','MODULE_4') ?>">
                         <a href="../MODULE_4/Manage_Merits_Claims.php"><i class="fas fa-clipboard-check"></i> Manage Merit Claims</a>
                       </li>
                       <li class="menu-item <?= isActive('VIEW_AWARDED.PHP','MODULE_4') ?>">
                         <a href="../MODULE_4/VIEW_AWARDED.PHP"><i class="fas fa-medal"></i> View Awarded Merits</a>
                       </li>
+
                     <?php elseif ($role === 'advisor'): ?>
                       <!-- ADVISOR MENU -->
                       <li class="menu-item <?= isActive('dashboard_advisor.php','all_dashbord') ?>">

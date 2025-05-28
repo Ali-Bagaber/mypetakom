@@ -1,6 +1,6 @@
 <?php 
 include('../Databased/db_connect.php');
-  include '../../mypetakom-1/HADER_SIDER_FOOTER/HST.PHP';
+  include '../HADER_SIDER_FOOTER/HST.PHP';
 ?>
 
 <!DOCTYPE html>
