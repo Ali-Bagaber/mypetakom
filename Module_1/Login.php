@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'db_connect.php';
+require '../Databased/db_connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['userID'];  // userID input is actually the username
@@ -29,13 +29,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Redirect based on user_role (case-sensitive filename fix)
             switch ($user['user_role']) {
                 case 'admin':
-                    header("Location: Admin-Dashboard.php");
+                    header("Location: ../all_dashbord/Admin-Dashboard.php");
                     exit;
                 case 'advisor':
-                    header("Location: dashboard_advisor.php");
+                    header("Location: ../all_dashbord/dashboard_advisor.php");
                     exit;
                 case 'student':
-                    header("Location: dashboard(student).php");
+                    header("Location: ../all_dashbord/dashbord(student).php");
                     exit;
                 default:
                     echo "Unknown user role.";
@@ -55,13 +55,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Login Page</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="../CSS/MODULE_1_css/style.css">
 </head>
 <body>
 <div class="container">
     <div class="logo-container">
-        <img src="logo1.png" alt="Logo 1" class="logo">
-        <img src="logo2.png" alt="Logo 2" class="logo">
+        <img src="../templet ( use this to match our overview)/image/logo-emblem__329x482.png" alt="Logo 1" class="logo">
+        <img src="../templet ( use this to match our overview)/image/images.png" alt="Logo 2" class="logo">
     </div>
     <div class="login-box">
         <div class="tabs">

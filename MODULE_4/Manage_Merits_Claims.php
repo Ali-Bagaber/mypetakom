@@ -308,7 +308,7 @@ include '../HADER_SIDER_FOOTER/HST.PHP';
 
         <!-- Statistics Cards -->
         <div class="summary-stats">
-            <div class="stat-card">
+            <div class="stat-card" style="background-color: blue;">
                 <div class="stat-number"><?= $stats['total_claims'] ?></div>
                 <div class="stat-label">Total Claims</div>
             </div>

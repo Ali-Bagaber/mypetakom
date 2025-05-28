@@ -1,5 +1,5 @@
 <?php
-require 'db_connect.php';
+require '../Databased/db_connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];

@@ -1,54 +1,20 @@
 <?php 
-include '../../Databased/db_connect.php';
-
-include '../HADER_SIDER_FOOTER/HST.PHP';
-
+include('../Databased/db_connect.php');
+  include '../../mypetakom-1/HADER_SIDER_FOOTER/HST.PHP';
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Petakom Coordinator (Administrator)</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../CSS/MODULE_1_css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <div class="header">
-    <div class="logo-section">
-      <img src="Logo1.png" alt="UMP Logo" class="logo">
-      <img src="Logo2.png" alt="Petakom Logo" class="logo">
-    </div>
-	<h1 class="white-text">Petakom Coordinator (Administrator)</h1>
-    <a href="#" id="logoutButton" class="logout-button">Log Out</a>
-  </div>
+
 
   <div class="main-container">
-    <!-- Sidebar -->
-    <div class="sidebar" style="border: 1px solid #000; padding: 10px; border-radius: 0;">
-      
-      <!-- Admin profile section -->
-      <div class="profile">
-        <h3>Admin Profile</h3>
-        <img src="profileIcon.png" alt="Admin Profile" class="profile-img" />
-      </div>
-
-      <!-- Divider line -->
-      <hr style="margin: 10px 0; border: 0; border-top: 1px solid #000;">
-
-      <!-- Sidebar menu -->
-      <ul class="menu" style="list-style-type: none; padding: 0; margin: 0;">
-        <li class="active">Dashboard</li>
-        <hr style="margin: 10px 0; border: 0; border-top: 1px solid #000;">
-
-        <li><a href="Admin-CreateUserAccount.php">Create User Account</a></li>
-        <hr style="margin: 10px 0; border: 0; border-top: 1px solid #000;">
-
-        <li><a href="Admin-ManageUserProfiles.php">Manage User Profiles</a></li>
-        <hr style="margin: 10px 0; border: 0; border-top: 1px solid #000;">
-
-        <li><a href="Admin-ManageMembership.php">Manage Membership</a></li>
-      </ul>
-    </div>
 
     <!-- Dashboard -->
     <div class="dashboard">
@@ -135,15 +101,16 @@ include '../HADER_SIDER_FOOTER/HST.PHP';
         }
       }
     });
-  </script>
-  <script>
-	  document.getElementById('logoutButton').addEventListener('click', function(event) {
-		event.preventDefault(); // Prevent the default anchor behavior
 
-		const confirmLogout = confirm("Are you sure you want to log out?");
-		if (confirmLogout) {
-		  // Redirect to login page
-		  window.location.href = 'login.php'; // Replace with your actual login page
-		}
-	  });	
-</script>
+    // Logout Button Function
+    document.getElementById('logoutButton').addEventListener('click', function(event) {
+      event.preventDefault();
+      const confirmLogout = confirm("Are you sure you want to log out?");
+      if (confirmLogout) {
+        sessionStorage.setItem('logoutSuccess', 'true');
+        window.location.href = 'login.php'; // Replace with your login page
+      }
+    });
+  </script>
+</body>
+</html>

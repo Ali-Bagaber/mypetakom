@@ -1,23 +1,29 @@
   <?php
 session_start();
-
-// 1) Only allow logged-in students
+  include '../../Databased/db_connect.php';
+ // 1️ Check the existing session keys
 if (
-    !isset($_SESSION['user_id'], $_SESSION['user_role'])
-    || $_SESSION['user_role'] !== 'student'
+    !isset($_SESSION['username'], $_SESSION['userRole'])
+    || $_SESSION['userRole'] !== 'student'
 ) {
-    header("Location: /mypetakom/mypetakom/Module_1/Login.php");
+    header("Location: ../Module_1/Login.php");
     exit;
 }
 
+// 2️ Look up the real user_id from the DB
+$stmt = $conn->prepare("SELECT user_id FROM users WHERE username = ?");
+$stmt->bind_param("s", $_SESSION['username']);
+$stmt->execute();
+$result = $stmt->get_result();
 
+if ($result->num_rows !== 1) {
+    // Something’s wrong—kick back to login
+    header("Location: ../Module_1/Login.php");
+    exit;
+}
 
-// 2) Pull the real ID from the session
-$user_id = $_SESSION['user_id'];
-  
-  include '../../Databased/db_connect.php';
-
-
+$row = $result->fetch_assoc();
+$user_id = $row['user_id'];
   
 
   // Get total merits for the student
@@ -113,7 +119,7 @@ $user_id = $_SESSION['user_id'];
   $page_title = "Student Dashboard";
 
   // Include header and sidebar
-  include '../../mypetakom/HADER_SIDER_FOOTER/HST.PHP';
+  include '../../mypetakom-1/HADER_SIDER_FOOTER/HST.PHP';
   ?>
 
 
@@ -125,7 +131,7 @@ $user_id = $_SESSION['user_id'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Dashboard – Awarded Merits</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../../mypetakom/CSS/dashbord.css">
+    <link rel="stylesheet" href="../../mypetakom-1/CSS/dashbord.css">
 
   </head>
   <body>

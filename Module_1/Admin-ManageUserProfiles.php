@@ -1,5 +1,5 @@
 <?php
-include('db_connect.php');
+include('../Databased/db_connect.php');
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -14,7 +14,7 @@ $result = $conn->query($sql);
 <head>
   <meta charset="UTF-8" />
   <title>Petakom Coordinator (Administrator) - Manage User Profiles</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../CSS/MODULE_1_css/style.css" />
 </head>
 <body>
   <?php
@@ -28,8 +28,8 @@ $result = $conn->query($sql);
   ?>
   <div class="header">
     <div class="logo-section">
-      <img src="Logo1.png" alt="UMP Logo" class="logo" />
-      <img src="Logo2.png" alt="Petakom Logo" class="logo" />
+      <img src="../templet ( use this to match our overview)/image/logo-emblem__329x482.png" alt="UMP Logo" class="logo" />
+      <img src="../templet ( use this to match our overview)/image/images.png" alt="Petakom Logo" class="logo" />
     </div>
     <h1 class="white-text" style="color: white;">Petakom Coordinator (Administrator)</h1>
     <a href="login.php" class="logout-button" id="logoutButton">Log Out</a>
@@ -39,17 +39,17 @@ $result = $conn->query($sql);
     <div class="sidebar">
       <div class="profile">
         <h3>Admin Profile</h3>
-        <img src="profileIcon.png" alt="Admin Profile" class="profile-img" />
+        <img src="../templet ( use this to match our overview)/image/user-icon.webp" alt="Admin Profile" class="profile-img" />
       </div>
       <hr style="margin: 10px 0; border: 0; border-top: 1px solid #000;">
       <ul class="menu" style="list-style-type: none; padding: 0; margin: 0;">
-        <li><a href="Admin-Dashboard.php">Dashboard</a></li>
+        <li><a href="../Module_1/Admin-Dashboard.php">Dashboard</a></li>
         <hr style="margin: 10px 0; border: 0; border-top: 1px solid #000;">
-        <li><a href="Admin-CreateUserAccount.php">Create User Account</a></li>
+        <li><a href="../Module_1/Admin-CreateUserAccount.php">Create User Account</a></li>
         <hr style="margin: 10px 0; border: 0; border-top: 1px solid #000;">
         <li class="active">Manage User Profiles</li>
         <hr style="margin: 10px 0; border: 0; border-top: 1px solid #000;">
-        <li><a href="Admin-ManageMembership.php">Manage Membership</a></li>
+        <li><a href="../Module_1/Admin-ManageMembership.php">Manage Membership</a></li>
       </ul>
     </div>
 

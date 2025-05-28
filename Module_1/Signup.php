@@ -1,5 +1,5 @@
 <?php
-include('db_connect.php');
+include('../Databased/db_connect.php');
 
 // Initialize variables
 $success = "";
@@ -55,13 +55,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Signup Page</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="../CSS/MODULE_1_css/style.css">
 </head>
 <body>
     <div class="container">
         <div class="logo-container">
-            <img src="logo1.png" alt="Logo 1" class="logo">
-            <img src="logo2.png" alt="Logo 2" class="logo">
+            <img src="../templet ( use this to match our overview)/image/logo-emblem__329x482.png" alt="Logo 1" class="logo">
+            <img src="../templet ( use this to match our overview)/image/images.png" alt="Logo 2" class="logo">
         </div>
         <div class="login-box">
             <div class="tabs">

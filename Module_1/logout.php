@@ -5,5 +5,5 @@ session_unset();
 session_destroy();
 
 // Redirect back to the login page
-header("Location: /mypetakom/mypetakom/Module_1/Login.php");
+header("Location: ../Module_1/Login.php");
 exit();

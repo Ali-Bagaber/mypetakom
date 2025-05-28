@@ -1,5 +1,5 @@
 <?php
-include('db_connect.php');
+include('../Databased/db_connect.php');
 
 if (isset($_GET['id'])) {
     $userId = $_GET['id'];
@@ -17,13 +17,13 @@ if (isset($_GET['id'])) {
 <head>
   <meta charset="UTF-8">
   <title>View User - Petakom Coordinator</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../CSS/MODULE_1_css/style.css">
 </head>
 <body>
   <div class="header">
     <div class="logo-section">
-      <img src="Logo1.png" alt="UMP Logo" class="logo">
-      <img src="Logo2.png" alt="Petakom Logo" class="logo">
+      <img src="../templet ( use this to match our overview)/image/logo-emblem__329x482.png" alt="UMP Logo" class="logo">
+      <img src="../templet ( use this to match our overview)/image/images.png" alt="Petakom Logo" class="logo">
     </div>
 	<h1 class="white-text" style="color: white;">Petakom Coordinator (Administrator)</h1>
     <a href="logout.php" id="logoutButton" class="logout-button">Log Out</a>
@@ -34,7 +34,7 @@ if (isset($_GET['id'])) {
     <div class="sidebar" style="border: 1px solid #000; padding: 10px;">
       <div class="profile">
         <h3>Admin Profile</h3>
-        <img src="profileIcon.png" alt="Admin Profile" class="profile-img" />
+        <img src="../templet ( use this to match our overview)/image/user-icon.webp" alt="Admin Profile" class="profile-img" />
       </div>
       <hr>
       <ul class="menu" style="list-style-type: none; padding: 0;">
@@ -57,7 +57,7 @@ if (isset($_GET['id'])) {
 			<p><strong>Email:</strong> <?= htmlspecialchars($user['email']) ?></p>
 			<p><strong>Role:</strong> <?= htmlspecialchars($user['user_role']) ?></p>
 			<br>
-			<a href="Admin-ManageUserProfiles.php" class="btn">Back to User List</a>
+			<a href="../Module_1/Admin-ManageUserProfiles.php" class="btn">Back to User List</a>
 		<?php else: ?>
 			<p>User not found.</p>
 		<?php endif; ?>
