@@ -129,9 +129,7 @@ function isActive($page, $dir = '') {
         </a>
       </div>
       <div class="nav-actions">
-        <div class="notification-icon">
-          <i class="fas fa-bell"></i>
-        </div>
+
       <a href="../Module_1/logout.php" class="btn-logout">
           <i class="fas fa-sign-out-alt"></i> Logout
       </a>
