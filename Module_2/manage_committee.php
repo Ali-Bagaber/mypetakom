@@ -29,18 +29,18 @@ if ($student_id_card) {
     <link rel="stylesheet" href="styleadvisor.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="logos">
-                <img src="ump logo.png" alt="UMP Logo">
-                <img src="petakom logo.png" alt="Petakom Logo">
-            </div>
+		<div class="container">
+		<!-- Sidebar -->
+		<div class="sidebar">
+			<div class="logos">
+				<img src="ump logo.png" alt="UMP Logo">
+				<img src="petakom logo.png" alt="Petakom Logo">
+			</div>
 			<h2>Advisor Profile</h2>
-            <div class="profile-pic"></div>
-            <ul>
+			<div class="profile-pic"></div>
+			<ul>
                  <li><a href="dashboard_advisor.php">Dashboard</a></li>
-				 <li>Manage User Profile</li>
+				 <li><a href="manage_profile_advisor.php">Manage User Profile</a></li>
 				 <li><a href="create_event.php">Create New Event</a></li>
 				 <li><a href="create_committee.php">Register Commitee </a></li>
 				 <li><a href="manage_event.php">Manage Events</a></li>
@@ -49,6 +49,7 @@ if ($student_id_card) {
 				 <li><a href="event_qr.php">Event QR Code</a></li>
             </ul>
         </div>
+		
 
         <!-- Main Content -->
         <div class="main-content">
