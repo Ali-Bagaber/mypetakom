@@ -36,6 +36,56 @@ $total_committees = $conn->query($sql_total_committees)->fetch_assoc()['total'];
 $sql_merit_applications = "SELECT COUNT(*) AS total FROM meritapplication";
 $merit_applications = $conn->query($sql_merit_applications)->fetch_assoc()['total'];
 
+// Event status for the chart
+$chart_sql = "SELECT event_status, COUNT(*) as total FROM events GROUP BY event_status";
+$chart_result = $conn->query($chart_sql);
+
+$chart_labels = [];
+$chart_data = [];
+
+while ($row = $chart_result->fetch_assoc()) {
+    $chart_labels[] = $row['event_status'];
+    $chart_data[] = $row['total'];
+}
+
+// Events per month
+$month_sql = "SELECT MONTH(start_date) AS month_number, DATE_FORMAT(start_date, '%M') AS month, COUNT(*) AS total
+              FROM events
+              WHERE YEAR(start_date) = YEAR(CURDATE())
+              GROUP BY MONTH(start_date)
+              ORDER BY MONTH(start_date)";
+
+
+$month_result = $conn->query($month_sql);
+
+$month_labels = [];
+$month_data = [];
+
+if ($month_result) {
+    while ($row = $month_result->fetch_assoc()) {
+        $month_labels[] = $row['month'];
+        $month_data[] = $row['total'];
+    }
+} else {
+    echo "Error in month SQL: " . $conn->error;
+}
+
+
+// Merit application status
+$merit_sql = "SELECT claim_status, COUNT(*) AS total FROM meritapplication GROUP BY claim_status";
+$merit_result = $conn->query($merit_sql);
+
+$merit_labels = [];
+$merit_data = [];
+
+if ($merit_result) {
+    while ($row = $merit_result->fetch_assoc()) {
+        $merit_labels[] = $row['claim_status'];
+        $merit_data[] = $row['total'];
+    }
+} else {
+    echo "Error in merit SQL: " . $conn->error;
+}
 
 ?>
 
@@ -46,6 +96,8 @@ $merit_applications = $conn->query($sql_merit_applications)->fetch_assoc()['tota
   <meta charset="UTF-8">
   <title>Event Advisor Dashboard</title>
   <link rel="stylesheet" href="styleadvisor.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	
 </head>
 <body>
   <div class="container">
@@ -54,12 +106,12 @@ $merit_applications = $conn->query($sql_merit_applications)->fetch_assoc()['tota
         <img src="ump logo.png" alt="UMP Logo">
         <img src="petakom logo.png" alt="PETAKOM Logo">
       </div>
-      <h2>Event Advisor Profile</h2>
+      <h2>Advisor Profile</h2>
       <div class="profile-pic"></div>
       <nav>
         <ul>
 		  <li><a href="dashboard_advisor.php" class="active">Dashboard</a></li>
-		  <li>Manage User Profile</li>
+		  <li><a href="manage_profile_advisor.php" >Manage User Profile</a></li>
 		  <li><a href="create_event.php">Create New Event</a></li>
 		  <li><a href="create_committee.php">Register Commitee </a></li>
 		  <li><a href="manage_event.php">Manage Events</a></li>
@@ -94,9 +146,17 @@ $merit_applications = $conn->query($sql_merit_applications)->fetch_assoc()['tota
       <section class="content">
         <div class="charts">
           <h3>Charts/Graphs</h3>
-          <div class="chart-box">[Event by Status]</div>
-          <div class="chart-box">[Merit Application Status]</div>
-          <div class="chart-box">[Event per Month]</div>
+          <div class="graph-box">
+			  <canvas id="eventStatusChart" width="200" height="100"></canvas>
+		  </div>
+          <div class="graph-box">
+			  <canvas id="meritStatusChart" width="200" height="100"></canvas>
+		  </div>
+
+          <div class="graph-box">
+			  <canvas id="eventsPerMonthChart" width="200" height="100"></canvas>
+		  </div>
+
         </div>
 
         <div class="short-list">
@@ -173,5 +233,121 @@ $merit_applications = $conn->query($sql_merit_applications)->fetch_assoc()['tota
       </section>
     </main>
   </div>
+  
+<script>
+  // Event Status Bar Chart
+  const ctx = document.getElementById('eventStatusChart').getContext('2d');
+  const eventStatusChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: <?php echo json_encode($chart_labels); ?>,
+      datasets: [{
+        label: 'Number of Events',
+        data: <?php echo json_encode($chart_data); ?>,
+        backgroundColor: ['#4CAF50', '#FFC107', '#F44336', '#03A9F4', '#9E9E9E'],
+        
+		borderColor: '#ffffff',
+        borderWidth: 3,
+        borderRadius: 3,
+        hoverBackgroundColor: ['#66BB6A', '#FFD54F', '#EF5350', '#29B6F6', '#BDBDBD'],
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          mode: 'index',
+          intersect: false,
+          backgroundColor: '#333',
+          titleColor: '#fff',
+          bodyColor: '#fff',
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { precision: 0 }
+        }
+      }
+    }
+  });
+
+  // Events Per Month line Chart
+  const ctxMonth = document.getElementById('eventsPerMonthChart').getContext('2d');
+  const eventsPerMonthChart = new Chart(ctxMonth, {
+    type: 'line',
+    data: {
+      labels: <?php echo json_encode($month_labels); ?>,
+      datasets: [{
+        label: 'Events Per Month',
+        data: <?php echo json_encode($month_data); ?>,
+        backgroundColor: 'rgba(33, 150, 243, 0.2)',
+        borderColor: '#2196F3',
+        borderWidth: 3,
+        pointBackgroundColor: '#fff',
+        pointBorderColor: '#2196F3',
+        fill: true,
+        tension: 0.,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: true },
+        tooltip: {
+          backgroundColor: '#333',
+          titleColor: '#fff',
+          bodyColor: '#fff',
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { precision: 0 }
+        }
+      }
+    }
+  });
+
+  // Merit Status Pie Chart
+  const ctxMerit = document.getElementById('meritStatusChart').getContext('2d');
+  const meritStatusChart = new Chart(ctxMerit, {
+    type: 'doughnut',
+    data: {
+      labels: <?php echo json_encode($merit_labels); ?>,
+      datasets: [{
+        label: 'Merit Applications',
+        data: <?php echo json_encode($merit_data); ?>,
+        backgroundColor: ['#8E24AA', '#43A047', '#FB8C00', '#E53935', '#3949AB'],
+        borderColor: '#fff',
+        borderWidth: 2,
+        hoverOffset: 8
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'center',
+          labels: {
+            color: '#000',
+            font: {
+              size: 12,
+              weight: 'bold'
+            }
+          }
+        },
+        tooltip: {
+          backgroundColor: '#222',
+          titleColor: '#fff',
+          bodyColor: '#fff',
+        }
+      }
+    }
+  });
+</script>
+
+
 </body>
 </html>

@@ -62,19 +62,18 @@ if (!$result) {
   <link rel="stylesheet" href="styleadvisor.css">
 </head>
 <body>
-  <div class="container">
-    <!-- Sidebar -->
+<div class="container">
+	<!-- Sidebar -->
     <div class="sidebar">
-      <div>
         <div class="logos">
-          <img src="ump logo.png" alt="UMP Logo">
-          <img src="petakom logo.png" alt="Petakom Logo">
+            <img src="ump logo.png" alt="UMP Logo">
+            <img src="petakom logo.png" alt="Petakom Logo">
         </div>
         <h2>Advisor Profile</h2>
         <div class="profile-pic"></div>
         <ul>
           <li><a href="dashboard_advisor.php">Dashboard</a></li>
-          <li>Manage User Profile</li>
+          <li><a href="manage_profile_advisor.php" >Manage User Profile</a></li>
           <li><a href="create_event.php">Create New Event</a></li>
           <li><a href="create_committee.php">Register Committee</a></li>
           <li><a href="manage_event.php">Manage Events</a></li>
@@ -82,17 +81,15 @@ if (!$result) {
           <li><a href="merit_approval.php" class="active">Merit Application Approval</a></li>
           <li><a href="event_qr.php">Event QR Code</a></li>
         </ul>
-      </div>
     </div>
 
     <!-- Main Content -->
     <div class="main-content">
       <div class="top-header">
-        <h2>MyPetakom System</h2>
+        <h1>MyPetakom System</h1>
         <button class="logout">Log Out</button>
       </div>
 
-      <div class="charts">
         <h2>Merit Application Approval</h2>
         <div class="table-wrapper">
           <table>
