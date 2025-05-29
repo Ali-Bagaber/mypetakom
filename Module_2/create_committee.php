@@ -106,7 +106,23 @@ if (isset($_POST['submit'])) {
 					<div style="flex:1;">
 				 
 						<label for="assigned-position">Assigned Position:</label><br>
-						<input type="text" id="role" name="role" required><br><br>
+							<select id="role" name="role" required>
+								<option value="">-- Select Role --</option>
+								<option value="Chairperson">Chairperson</option>
+								<option value="Vice Chair">Vice Chair</option>
+								<option value="Secretary">Secretary</option>
+								<option value="Treasurer">Treasurer</option>
+								<option value="Logistics">Logistics</option>
+								<option value="Technical">Technical</option>
+								<option value="Multimedia">Multimedia</option>
+								<option value="Publicity">Publicity</option>
+								<option value="Program & Activity">Program & Activity</option>
+								<option value="Promo Team">Promotion</option>
+								<option value="Sponsorship Team">Sponsorship</option>
+								<option value="Protocol Team">Protocol</option>
+								<option value="Registration Team">Registration</option>
+								<option value="Welfare & Safety">Welfare & Safety</option>
+							</select><br><br>
 						
 						<label for="event">Select Event:</label><br>
 							<select id="event" name="title" required><br><br>
