@@ -32,7 +32,7 @@ $result = $conn->query($sql);
         <div class="profile-pic"></div>
         <ul>
             <li><a href="dashboard_advisor.php">Dashboard</a></li>
-            <li>Manage User Profile</li>
+            <li><a href="manage_profile_advisor.php">Manage User Profile</a></li>
             <li><a href="create_event.php">Create New Event</a></li>
 			<li><a href="create_committee.php">Register Commitee </a></li>
             <li><a href="manage_event.php" class="active">Manage Events</a></li>
