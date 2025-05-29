@@ -15,7 +15,6 @@ include('db_connect.php');
   <div class="container">
     <!-- Sidebar -->
     <div class="sidebar">
-      <div>
         <div class="logos">
           <img src="ump logo.png" alt="ump Logo">
           <img src="petakom logo.png" alt="petakom Logo">
@@ -24,7 +23,7 @@ include('db_connect.php');
         <div class="profile-pic"></div>
         <ul>
 			<li><a href="dashboard_advisor.php">Dashboard</a></li>
-			<li>Manage User Profile</li>
+			<li><a href="manage_profile_advisor.php">Manage User Profile</a></li>
 			<li><a href="create_event.php">Create New Event</a></li>
 			<li><a href="create_committee.php">Register Commitee </a></li>
 			<li><a href="manage_event.php">Manage Events</a></li>
@@ -33,12 +32,11 @@ include('db_connect.php');
 			<li><a href="event_qr.php"class="active">Event QR Code</a></li>
         </ul>
       </div>
-    </div>
 
     <!-- Main Content -->
     <div class="main-content">
       <div class="top-header">
-        <h2>MyPetakom System</h2>
+        <h1>MyPetakom System</h1>
         <button class="logout">Log Out</button>
       </div>
 
@@ -82,6 +80,7 @@ include('db_connect.php');
 					if ($status === 'Active') $color = 'lightgreen';
 					elseif ($status === 'Postponed') $color = 'gold';
 					elseif ($status === 'Cancelled') $color = 'red';
+					elseif ($status === 'Completed') $color = 'lightblue';
 
 					echo "
 					  <tr>
