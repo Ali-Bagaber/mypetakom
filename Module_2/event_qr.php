@@ -93,10 +93,14 @@ include('db_connect.php');
 						</td>
 						<td style='color: {$color}'>{$status}</td>
 						<td>
-						  <a href='view_event.php?event_id={$eventId}' target='_blank'>View</a> /
-						  <a href='#' onclick='copyLink(\"{$qrLink}\")'>🔗Copy Link</a>
+						  
+						  <a href='view_event.php?event_id={$eventId}' target='_blank'><button>View</button></a>
+
+						  <a href='#' onclick=\"copyLink('{$qrLink}'); return false;\"><button>Copy Link</button></a>
+						  
 						</td>
 					  </tr>";
+
 					$counter++;
 				  }
 				} else {
