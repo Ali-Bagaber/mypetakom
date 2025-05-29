@@ -2,30 +2,53 @@
 session_start();
 include('db_connect.php');
 
-// Ensure the user is logged in
-if (!isset($_SESSION['user_id'])) {
+// Step 1: Ensure user is logged in by checking username
+if (!isset($_SESSION['username'])) {
     echo "<script>alert('You must be logged in to access this page.'); window.location.href = 'Login.php';</script>";
     exit();
 }
 
-$user_id = $_SESSION['user_id'];
+$username = $_SESSION['username'];
 
-// Optional: check if user is advisor
-$sql = "SELECT * FROM eventadvisor WHERE user_id = ?";
+// Fetch user_id based on username
+$stmt_user = $conn->prepare("SELECT user_id FROM users WHERE username = ?");
+$stmt_user->bind_param("s", $username);
+$stmt_user->execute();
+$result_user = $stmt_user->get_result();
+
+if ($result_user->num_rows !== 1) {
+    echo "<script>alert('User not found.'); window.location.href = 'Login.php';</script>";
+    exit();
+}
+
+$user_data = $result_user->fetch_assoc();
+$user_id = $user_data['user_id'];
+
+
+// Step 2: Fetch advisor data (from users + eventadvisor)
+$sql = "SELECT 
+            users.user_id,
+            users.name,
+            users.username,
+            users.email,
+            eventadvisor.admin_phone_number,
+            eventadvisor.position_advisor
+        FROM users
+        LEFT JOIN eventadvisor ON users.user_id = eventadvisor.user_id
+        WHERE users.user_id = ?";
+
 $stmt = $conn->prepare($sql);
+if (!$stmt) {
+    die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
+}
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
-if ($result && $result->num_rows > 0) {
-    // Redirect directly to edit profile page for this advisor
-    header("Location: edit_user_profile.php?id=" . $user_id);
-    exit();
-} else {
-    echo "<script>alert('Advisor profile not found.'); window.location.href = 'dashboard_advisor.php';</script>";
-    exit();
-}
 ?>
+
+
+
 
 
 
@@ -75,7 +98,6 @@ if ($result && $result->num_rows > 0) {
                         <th>Full Name</th>
                         <th>Username</th>
                         <th>Email</th>
-                        <th>Advisor Name</th>
                         <th>Phone Number</th>
                         <th>Position</th>
                         <th>Update</th>
@@ -91,11 +113,10 @@ if ($result && $result->num_rows > 0) {
                             echo "<td>" . htmlspecialchars($row['name']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['username']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['email']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['advisor_name']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['admin_phone_number']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['position_advisor']) . "</td>";
                             echo "<td>
-                                <a href='edit_user_profile.php?id=" . $row['user_id'] . "'><button>Edit</button></a>
+                                <a href='edit_profile.php?id=" . $row['user_id'] . "'><button>Edit</button></a>
                             </td>";
                             echo "</tr>";
                         }
