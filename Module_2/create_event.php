@@ -1,7 +1,6 @@
 <?php
 include '../../Databased/db_connect.php';
 
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $event_name = $_POST['event_name'];
     $description = $_POST['description'];
@@ -117,8 +116,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <nav>
         <ul>
           <li><a href="dashboard_advisor.php">Dashboard</a></li>
-          <li>Manage User Profile</li>
+          <li><a href="manage_profile_advisor.php">Manage User Profile</a></li>
           <li><a href="create_event.php" class="active">Create New Event</a></li>
+		  <li><a href="create_committee.php">Register Commitee </a></li>
           <li><a href="manage_event.php">Manage Events</a></li>
           <li><a href="manage_committee.php">Manage Committees</a></li>
           <li><a href="merit_approval.php">Merit Application Approval</a></li>
