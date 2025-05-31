@@ -76,11 +76,11 @@ include('db_connect.php');
 
 
 					// Set status color
-					$color = 'black';
-					if ($status === 'Active') $color = 'lightgreen';
-					elseif ($status === 'Postponed') $color = 'gold';
-					elseif ($status === 'Cancelled') $color = 'red';
-					elseif ($status === 'Completed') $color = 'lightblue';
+					$color = 'grey';
+					if ($status === 'active') $color = 'lightgreen';
+					elseif ($status === 'postponed') $color = 'gold';
+					elseif ($status === 'cancelled') $color = 'red';
+					elseif ($status === 'completed') $color = 'lightblue';
 
 					echo "
 					  <tr>
