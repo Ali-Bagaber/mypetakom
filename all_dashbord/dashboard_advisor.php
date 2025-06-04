@@ -1,5 +1,5 @@
 <?php
-include('db_connect.php');
+include '../../Databased/db_connect.php';
 
 // Fetch only upcoming events
 $sql = "SELECT * FROM events WHERE start_date >= CURDATE() ORDER BY start_date ASC";
@@ -86,7 +86,7 @@ if ($merit_result) {
 } else {
     echo "Error in merit SQL: " . $conn->error;
 }
-
+  include '../HADER_SIDER_FOOTER/HST.PHP';
 ?>
 
 
@@ -95,39 +95,16 @@ if ($merit_result) {
 <head>
   <meta charset="UTF-8">
   <title>Event Advisor Dashboard</title>
-  <link rel="stylesheet" href="styleadvisor.css">
+  <link rel="stylesheet" href="../CSS/MODULE_2_css/styleadvisor.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	
 </head>
+
 <body>
   <div class="container">
-    <aside class="sidebar">
-      <div class="logos">
-        <img src="ump logo.png" alt="UMP Logo">
-        <img src="petakom logo.png" alt="PETAKOM Logo">
-      </div>
-      <h2>Advisor Profile</h2>
-      <div class="profile-pic"></div>
-      <nav>
-        <ul>
-		  <li><a href="dashboard_advisor.php" class="active">Dashboard</a></li>
-		  <li><a href="manage_profile_advisor.php" >Manage User Profile</a></li>
-		  <li><a href="create_event.php">Create New Event</a></li>
-		  <li><a href="create_committee.php">Register Commitee </a></li>
-		  <li><a href="manage_event.php">Manage Events</a></li>
-		  <li><a href="manage_committee.php">Manage Committees</a></li>
-		  <li><a href="merit_approval.php">Merit Application Approval</a></li>
-		  <li><a href="event_qr.php">Event QR Code</a></li>
-		</ul>
 
-      </nav>
-    </aside>
 
     <main class="main-content">
-      <header class="top-header">
-        <h1>MyPetakom System</h1>
-        <button class="logout">Log Out</button>
-      </header>
 
       <section class="dashboard-header">
         <h2>Event Advisor Dashboard</h2>

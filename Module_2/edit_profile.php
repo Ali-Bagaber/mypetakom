@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('db_connect.php');
+include '../../Databased/db_connect.php';
 
 if (!isset($_GET['id'])) {
     echo "<script>alert('No advisor selected.'); window.location.href = 'manage_profile_advisor.php';</script>";
@@ -48,6 +48,8 @@ $stmt2->bind_param("ssi", $phone, $position, $user_id);
     echo "<script>alert('Profile updated successfully!'); window.location.href = 'manage_profile_advisor.php';</script>";
     exit();
 }
+
+
 ?>
 
 <!DOCTYPE html>

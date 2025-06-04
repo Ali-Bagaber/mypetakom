@@ -1,7 +1,6 @@
 <?php
 
-include('db_connect.php');
-
+include '../../Databased/db_connect.php';
 
 if (isset($_POST['submit'])) {
     $student_id_card = $_POST['student_id_card'];
@@ -41,7 +40,7 @@ if (isset($_POST['submit'])) {
         echo "<script>alert('Event not found.');</script>";
     }
 }
-
+  include '../HADER_SIDER_FOOTER/HST.PHP';
 ?>
 
 
@@ -54,36 +53,14 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Committee</title>
-    <link rel="stylesheet" href="styleadvisor.css">
+    <link rel="stylesheet" href="../CSS/MODULE_2_css/styleadvisor.css">
 </head>
 <body>
     <div class="container">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="logos">
-                <img src="ump logo.png" alt="UMP Logo">
-                <img src="petakom logo.png" alt="Petakom Logo">
-            </div>
-			<h2>Advisor Profile</h2>
-            <div class="profile-pic"></div>
-            <ul>
-                 <li><a href="dashboard_advisor.php">Dashboard</a></li>
-				 <li><a href="manage_profile_advisor.php" >Manage User Profile</a></li>
-				 <li><a href="create_event.php">Create New Event</a></li>
-				 <li><a href="create_committee.php" class="active" >Register Commitee </a></li>
-				 <li><a href="manage_event.php">Manage Events</a></li>
-				 <li><a href="manage_committee.php">Manage Committees</a></li>
-				 <li><a href="merit_approval.php">Merit Application Approval</a></li>
-				 <li><a href="event_qr.php">Event QR Code</a></li>
-            </ul>
-        </div>
 
         <!-- Main Content -->
 		<main class="main-content">
-			<header class="top-header">
-				<h1>MyPetakom System</h1>
-				<button class="logout" onclick="window.location.href='logout.php'">Log Out</button>
-			</header>
+
 
             <section class="dashboard-header">
                 <h2>Commitee Registration Form</h2>

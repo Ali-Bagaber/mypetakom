@@ -1,5 +1,6 @@
 <?php
-include('db_connect.php');
+include '../../Databased/db_connect.php';
+  include '../HADER_SIDER_FOOTER/HST.PHP';
 ?>
 
 
@@ -8,37 +9,16 @@ include('db_connect.php');
 <head>
   <meta charset="UTF-8">
   <title>Event QR Code</title>
-  <link rel="stylesheet" href="styleadvisor.css">
+<link rel="stylesheet" href="../CSS/MODULE_2_css/styleadvisor.css">
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 </head>
 <body>
   <div class="container">
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <div class="logos">
-          <img src="ump logo.png" alt="ump Logo">
-          <img src="petakom logo.png" alt="petakom Logo">
-        </div>
-		<h2>Advisor Profile</h2>
-        <div class="profile-pic"></div>
-        <ul>
-			<li><a href="dashboard_advisor.php">Dashboard</a></li>
-			<li><a href="manage_profile_advisor.php">Manage User Profile</a></li>
-			<li><a href="create_event.php">Create New Event</a></li>
-			<li><a href="create_committee.php">Register Commitee </a></li>
-			<li><a href="manage_event.php">Manage Events</a></li>
-			<li><a href="manage_committee.php">Manage Committees</a></li>
-			<li><a href="merit_approval.php">Merit Application Approval</a></li>
-			<li><a href="event_qr.php"class="active">Event QR Code</a></li>
-        </ul>
-      </div>
+
 
     <!-- Main Content -->
     <div class="main-content">
-      <div class="top-header">
-        <h1>MyPetakom System</h1>
-        <button class="logout">Log Out</button>
-      </div>
+
 
       <h2>Event QR Codes</h2>
 	<div class="qr-table-wrapper">

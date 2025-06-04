@@ -1,5 +1,5 @@
 <?php
-include('db_connect.php');
+include '../../Databased/db_connect.php';
 
 if (isset($_GET['id'])) {
     $committee_id = intval($_GET['id']);

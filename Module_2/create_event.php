@@ -92,7 +92,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $stmt->close();
     $conn->close();
+
+    
 }
+
+  include '../HADER_SIDER_FOOTER/HST.PHP';
 ?>
 
 
@@ -102,36 +106,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
   <meta charset="UTF-8">
   <title>Create New Event</title>
-  <link rel="stylesheet" href="styleadvisor.css">
+<link rel="stylesheet" href="../CSS/MODULE_2_css/styleadvisor.css">
 </head>
 <body>
   <div class="container">
-    <aside class="sidebar">
-      <div class="logos">
-        <img src="ump logo.png" alt="UMP Logo">
-        <img src="petakom logo.png" alt="PETAKOM Logo">
-      </div>
-      <h2>Advisor Profile</h2>
-      <div class="profile-pic"></div>
-      <nav>
-        <ul>
-          <li><a href="dashboard_advisor.php">Dashboard</a></li>
-          <li><a href="manage_profile_advisor.php">Manage User Profile</a></li>
-          <li><a href="create_event.php" class="active">Create New Event</a></li>
-		  <li><a href="create_committee.php">Register Commitee </a></li>
-          <li><a href="manage_event.php">Manage Events</a></li>
-          <li><a href="manage_committee.php">Manage Committees</a></li>
-          <li><a href="merit_approval.php">Merit Application Approval</a></li>
-          <li><a href="event_qr.php">Event QR Code</a></li>
-        </ul>
-      </nav>
-    </aside>
+
 
     <main class="main-content">
-      <header class="top-header">
-        <h1>MyPetakom System</h1>
-        <button class="logout" onclick="window.location.href='logout.php'">Log Out</button>
-      </header>
+     
 
       <section class="dashboard-header">
         <h2>Create New Event Form</h2>

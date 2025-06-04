@@ -1,5 +1,5 @@
 <?php
-include('db_connect.php');
+include '../../Databased/db_connect.php';
 
 if (!isset($_GET['event_id'])) {
   echo "Invalid event ID.";
@@ -16,6 +16,7 @@ if (mysqli_num_rows($result) == 0) {
 }
 
 $event = mysqli_fetch_assoc($result);
+
 ?>
 
 <!DOCTYPE html>
