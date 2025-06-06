@@ -26,7 +26,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    $created_by = 1;
+   session_start(); 
+	if (!isset($_SESSION['username'])) {
+		echo "<script>alert('You must be logged in to access this page.'); window.location.href = 'Login.php';</script>";
+		exit();
+	}
+
+	$username = $_SESSION['username'];
+
+	// Fetch user_id from username
+	$stmt = $conn->prepare("SELECT user_id FROM users WHERE username = ?");
+	$stmt->bind_param("s", $username);
+	$stmt->execute();
+	$result = $stmt->get_result();
+
+	if ($result->num_rows !== 1) {
+		echo "<script>alert('User not found.'); window.location.href = 'Login.php';</script>";
+		exit();
+	}
+
+	$row = $result->fetch_assoc();
+	$created_by = $row['user_id'];
+	
     $event_status = isset($_POST['save_draft']) ? 'Draft' : 'Pending Approval';
     $event_level = 'Faculty';
     $qrcode_event = '';
