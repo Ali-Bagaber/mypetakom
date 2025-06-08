@@ -134,9 +134,9 @@ function isActive($page, $dir = '') {
     /* Ensure main-content is pushed right of the fixed sidebar */
     .dashboard, .main-container {
       flex: 1;
-      margin-left: 280px;       /* same width as .sidebar */
+      margin-left: 200px;       /* same width as .sidebar */
       padding: 30px;
-      background-color: var(--bg-light);
+  background-color: #f0f0f0;
       min-height: calc(100vh - 90px);
     }
   </style>

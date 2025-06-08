@@ -97,7 +97,13 @@ if ($merit_result) {
   <title>Event Advisor Dashboard</title>
   <link rel="stylesheet" href="../CSS/MODULE_2_css/styleadvisor.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	
+	<style>
+    body {
+        height: 55rem !important;
+  overflow-y: auto !important;
+  
+    }
+  </style>
 </head>
 
 <body>

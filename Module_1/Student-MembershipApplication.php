@@ -94,6 +94,10 @@ $user_id = $row['user_id'];
       border: 1px solid #ccc;
       border-radius: 8px;
     }
+
+body {
+  background-color: #f0f0f0; 
+}
   </style>
 </head>
 <body>

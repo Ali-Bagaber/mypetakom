@@ -8,26 +8,18 @@ body {
     background-color: #0D2438; /* Dark blue background */
 }
 
+
+
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+
     padding: 20px;
 }
 
-.logo-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
 
-.logo {
-    width: 100px;
-    height: 100px;
-    margin: 0 15px;
-}
 
 /* -------------------------------------------- */
 /* Login, Signup, Forgot Password Styling       */
@@ -157,53 +149,11 @@ input[type="email"] {
     min-height: 100vh;
 }
 
-.sidebar {
-    width: 250px;
-    background-color: #0D2438;
-    color: white;
-    padding-top: 20px;
-}
-
-.profile {
-    text-align: center;
-    padding: 20px 0;
-}
-
-.profile-img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background-color: gray;
-    margin-bottom: 10px;
-}
-
-.menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.menu li {
-    color: white;                 
-    padding: 15px 20px;
-    border-top: 1px solid #ffffff20;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.menu li:hover {
-    background-color: grey;     /* Purple background on hover */
-    color: white;                 /* White text on hover */
-}
-
-.menu li.active {
-    color: white;                 /* Text remains black */
-}
 
 .dashboard {
     flex: 1;
     padding: 40px;
-    background-color: white;
+
 }
 
 .stats {

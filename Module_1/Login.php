@@ -56,6 +56,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <title>Login Page</title>
     <link rel="stylesheet" type="text/css" href="../CSS/MODULE_1_css/style.css">
+    <style>
+        .logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+    margin: 0 15px;
+}
+    </style>
 </head>
 <body>
 <div class="container">

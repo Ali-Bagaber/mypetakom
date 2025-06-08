@@ -16,7 +16,7 @@ $result = $conn->query($sql);
 <head>
   <meta charset="UTF-8" />
   <title>Petakom Coordinator (Administrator) - Manage User Profiles</title>
-
+  <link rel="stylesheet" href="../CSS/MODULE_1_css/style.css"/>
 </head>
 <body>
   <?php
