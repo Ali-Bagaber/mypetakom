@@ -149,29 +149,8 @@ input[type="email"] {
 /* Admin Dashboard Layout                       */
 /* -------------------------------------------- */
 
-.header {
-    background-color: #082c3f;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px;
-}
 
-.logo-section {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
 
-.logout-button {
-    background-color: #c62828;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 20px;
-    font-weight: bold;
-}
 
 .main-container {
     display: flex;

@@ -8,6 +8,7 @@ if ($conn->connect_error) {
 $sql = "SELECT * FROM users";
 $result = $conn->query($sql);
 
+    include '../HADER_SIDER_FOOTER/HST.PHP';
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +16,7 @@ $result = $conn->query($sql);
 <head>
   <meta charset="UTF-8" />
   <title>Petakom Coordinator (Administrator) - Manage User Profiles</title>
-  <link rel="stylesheet" href="../CSS/MODULE_1_css/style.css" />
+
 </head>
 <body>
   <?php
@@ -27,7 +28,7 @@ $result = $conn->query($sql);
       }
   }
 
-    include '../HADER_SIDER_FOOTER/HST.PHP';
+
   ?>
   
 

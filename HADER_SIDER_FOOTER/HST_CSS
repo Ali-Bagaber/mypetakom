@@ -467,6 +467,8 @@ body {
   bottom: 0;
   left: 0;
   z-index: 998;
+  margin-left: 280px; /* Adjusted for sidebar width */
+
 }
 
 /* Badge styles */
