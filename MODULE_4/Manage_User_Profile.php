@@ -127,21 +127,15 @@ include '../HADER_SIDER_FOOTER/HST.PHP';
   <div class="form-container">
     <h2><i class="fas fa-user"></i> Manage Your Profile</h2>
 
-    <?php if ($success): ?>
-      <div class="alert-success"><?= htmlspecialchars($success) ?></div>
-    <?php endif; ?>
-    <?php if ($error): ?>
-      <div class="alert-error"><?= htmlspecialchars($error) ?></div>
-    <?php endif; ?>
 
-    <form method="POST" action="">
+  <div class="form-view">
       <div class="form-group">
         <label for="username">Username</label>
-        <input type="text" id="username" name="username" required value="<?= htmlspecialchars($username) ?>">
+        <input type="text" id="username" name="username" required value="<?= htmlspecialchars($username) ?>" disabled>
       </div>
       <div class="form-group">
         <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" required value="<?= htmlspecialchars($email) ?>">
+        <input type="email" id="email" name="email" required value="<?= htmlspecialchars($email) ?>" disabled>
       </div>
 
       <hr>
@@ -149,29 +143,26 @@ include '../HADER_SIDER_FOOTER/HST.PHP';
       <h3>Student Details</h3>
       <div class="form-group">
         <label for="student_name">Full Name</label>
-        <input type="text" id="student_name" name="student_name" value="<?= htmlspecialchars($student_name) ?>">
+        <input type="text" id="student_name" name="student_name" value="<?= htmlspecialchars($student_name) ?>" disabled>
       </div>
       <div class="form-group">
         <label for="student_id_card">Student ID Card</label>
-        <input type="text" id="student_id_card" name="student_id_card" readonly value="<?= htmlspecialchars($student_id_card) ?>">
+        <input type="text" id="student_id_card" name="student_id_card" readonly value="<?= htmlspecialchars($student_id_card) ?>" disabled>
       </div>
       <div class="form-group">
         <label for="program">Program</label>
-        <input type="text" id="program" name="program" readonly value="<?= htmlspecialchars($program) ?>">
+        <input type="text" id="program" name="program" readonly value="<?= htmlspecialchars($program) ?>" disabled>
       </div>
       <div class="form-group">
         <label for="semester">Semester</label>
-        <input type="text" id="semester" name="semester" readonly value="<?= htmlspecialchars($semester) ?>">
+        <input type="text" id="semester" name="semester" readonly value="<?= htmlspecialchars($semester) ?>" disabled>
       </div>
       <div class="form-group">
         <label for="faculty">Faculty</label>
-        <input type="text" id="faculty" name="faculty" readonly value="<?= htmlspecialchars($faculty) ?>">
+        <input type="text" id="faculty" name="faculty" readonly value="<?= htmlspecialchars($faculty) ?>" disabled>
       </div>
-
-      <button type="submit" class="btn-primary">
-        <i class="fas fa-save"></i> Save Changes
-      </button>
-    </form>
+      
+    </div>
   </div>
 
 </body>

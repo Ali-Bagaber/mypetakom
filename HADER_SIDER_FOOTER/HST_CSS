@@ -25,6 +25,8 @@ body {
   color: var(--text-dark);
   line-height: 1.6;
   background-color: #f0f0f0;
+    margin-bottom: 4%; /* Add space for footer */
+
 }
 
 /* Layout */

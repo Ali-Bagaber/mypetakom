@@ -184,7 +184,7 @@
 }
 
 .stat-card {
-  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+
   color: white;
   padding: 25px;
   border-radius: var(--border-radius);

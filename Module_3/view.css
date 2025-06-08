@@ -1,0 +1,63 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #e0e0e0;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main {
+  flex: 1;
+  padding: 20px;
+}
+
+
+
+.scanner-box {
+  background-color: #fff;
+  padding: 20px;
+  max-width: 500px;
+  margin: 20px auto;
+  border-radius: 5px;
+}
+
+#reader {
+  background-color: #f0f0f0;
+  height: 200px;
+  margin-top: 10px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+button {
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+}
+
+#cancelBtn {
+  background-color: #ccc;
+}
+
+#uploadBtn {
+  background-color: #ddd;
+}
+
+#continueBtn {
+  background-color: green;
+  color: white;
+}
+
+#resultMessage {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+}

@@ -1,0 +1,133 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0px;
+}
+
+.history-section {
+  padding: 24px;
+  background-color:#f0f0f0;
+  border-radius: 8px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.history-title {
+  font-weight: 600;
+  margin-bottom: 16px;
+  font-size: 20px;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.history-table thead {
+  background-color: #cbd5e1;
+  color: #1f2937;
+}
+
+.history-table th,
+.history-table td {
+  border: 1px solid #9ca3af;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+.bg-gray {
+  background-color: #e5e7eb;
+}
+
+.status-absent {
+  color: #dc2626;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.status-present {
+  color: #16a34a;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.status-absent:hover,
+.status-present:hover {
+  text-decoration: underline;
+}
+
+.history-section {
+  padding: 24px;
+  background-color: #f0f0f0;
+}
+
+.history-title {
+  font-weight: 600;
+  margin-bottom: 16px;
+  font-size: 20px;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.history-table th,
+.history-table td {
+  border: 1px solid #9ca3af;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.history-table thead {
+  background-color: #cbd5e1;
+  color: #1f2937;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+.bg-gray {
+  background-color: #e5e7eb;
+}
+
+.status-absent {
+  color: #dc2626;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.status-present {
+  color: #16a34a;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.status-absent:hover,
+.status-present:hover {
+  text-decoration: underline;
+}
+
+.main-content1 {
+  
+  padding: 20px;
+  padding-top: 100px;
+  flex: 1;
+
+}

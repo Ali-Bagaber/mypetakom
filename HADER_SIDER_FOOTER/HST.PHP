@@ -230,13 +230,13 @@ function isActive($page, $dir = '') {
 
 
                 <li class="menu-item <?= isActive('view.php','Module_3') ?>">
-                  <a href="../Module_3/Module_3/view.php">
+                  <a href="../Module_3/view.php">
                     <i class="fas fa-camera"></i> Scan Attendance
                   </a>
                 </li>
 
                 <li class="menu-item <?= isActive('historyatd.php','Module_3') ?>">
-                  <a href="../Module_3/Module_3/historyatd.php">
+                  <a href="../Module_3/historyatd.php">
                     <i class="fas fa-qrcode"></i> Attendance History
                   </a>
                 </li>
@@ -287,7 +287,7 @@ function isActive($page, $dir = '') {
                   </a>
                 </li>
                 <li class="menu-item <?= isActive('merit_approval.php','MODULE_4') ?>">
-                  <a href="../MODULE_2/merit_approval.php">
+                  <a href="../Module_4/manage_claim_advisor.php">
                     <i class="fas fa-check-double"></i> Merit Application Approval
                   </a>
                 </li>
