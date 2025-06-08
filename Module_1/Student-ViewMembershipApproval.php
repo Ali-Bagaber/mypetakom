@@ -1,9 +1,15 @@
 <?php
-include('db_connect.php');
+       
 session_start();
-
+ include '../../Databased/db_connect.php';
 // Use logged-in user_id from session
-$user_id = $_SESSION['user_id'] ?? 0;
+$stmt = $conn->prepare("SELECT user_id FROM users WHERE username = ?");
+$stmt->bind_param("s", $_SESSION['username']);
+$stmt->execute();
+$result = $stmt->get_result();
+
+$row = $result->fetch_assoc();
+$user_id = $row['user_id'];
 
 if ($user_id == 0) {
     // Not logged in - redirect to login page or show error
@@ -24,6 +30,7 @@ $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $student = $result->fetch_assoc();
+  include '../HADER_SIDER_FOOTER/HST.PHP';
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +38,7 @@ $student = $result->fetch_assoc();
 <head>
   <meta charset="UTF-8" />
   <title>Petakom Membership Status</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../CSS/MODULE_1_css/style.css" />
   <style>
     .preview-img {
       max-height: 200px;
@@ -41,7 +48,7 @@ $student = $result->fetch_assoc();
     }
 
     .student-details {
-      background: #f9f9f9;
+
       padding: 20px;
       border-radius: 10px;
       margin-top: 20px;
@@ -61,43 +68,13 @@ $student = $result->fetch_assoc();
       display: inline-block;
     }
 
-    .header, .sidebar, .dashboard {
-      /* Add any necessary styling here */
-    }
+
   </style>
 </head>
 <body>
-  <div class="header">
-    <div class="logo-section">
-      <img src="Logo1.png" alt="UMP Logo" class="logo" />
-      <img src="Logo2.png" alt="Petakom Logo" class="logo" />
-    </div>
-    <h1 class="white-text" style="color: white;">Student</h1>
-	<a href="#" id="logoutButton" class="logout-button">Log Out</a>
-  </div>
-
+  
   <div class="main-container">
-    <div class="sidebar">
-      <div class="profile">
-        <h3>Student Profile</h3>
-        <img src="profileIcon.png" alt="Student Profile" class="profile-img" />
-      </div>
-      <hr />
-      <ul class="menu">
-        <li><a href="Admin-CreateUserAccount.php">Dashboard</a></li>
-        <hr />
-        <li><a href="Admin-CreateUserAccount.php">Manage User Profile</a></li>
-        <hr />
-        <li><a href="Student-MembershipApplication.php">Manage Membership</a></li>
-        <hr />
-		<li class="active">View Membership</li>
-        <hr />
-        <li><a href="Admin-ManageUserProfiles.php">View Awarded Merits</a></li>
-        <hr />
-        <li><a href="Admin-ManageUserProfiles.php">Manage Merits Claims</a></li>
-        <hr />
-      </ul>
-    </div>
+   
 
     <div class="dashboard">
       <div class="container">

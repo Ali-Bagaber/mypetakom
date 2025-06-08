@@ -1,5 +1,5 @@
 <?php
-include('db_connect.php');
+        include '../../Databased/db_connect.php';
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -25,6 +25,7 @@ $sql = "
   ORDER BY FIELD(m.status, 'pending', 'approved', 'rejected'), s.student_name
 ";
 $result = $conn->query($sql);
+  include '../HADER_SIDER_FOOTER/HST.PHP';
 ?>
 
 <!DOCTYPE html>
@@ -66,36 +67,10 @@ $result = $conn->query($sql);
     </style>
 </head>
 <body>
-<div class="header">
-    <div class="logo-section">
-        <img src="Logo1.png" alt="UMP Logo" class="logo" />
-        <img src="Logo2.png" alt="Petakom Logo" class="logo" />
-    </div>
-    <h1 class="white-text" style="color: white;">Petakom Coordinator (Administrator)</h1>
-	<a href="#" id="logoutButton" class="logout-button">Log Out</a>
-</div>
+
 
 <div class="main-container">
-    <div class="sidebar">
-        <div class="profile">
-            <h3>Admin Profile</h3>
-            <img src="profileIcon.png" alt="Admin Profile" class="profile-img" />
-        </div>
-        <hr>
-        <ul class="menu">
-            <li><a href="Admin-Dashboard.php">Dashboard</a></li>
-            <hr>
-            <li><a href="Admin-CreateUserAccount.php">Create User Account</a></li>
-            <hr>
-            <li><a href="Admin-ManageUserProfiles.php">Manage User Profiles</a></li>
-            <hr>
-            <li class="active">Manage Memberships</li>
-            <hr>
-            <li><a href="Admin-ManageMerit.php">Manage Merits</a></li>
-            <hr>
-        </ul>
-    </div>
-
+    
     <div class="dashboard">
         <h2>Students Membership Approval</h2>
 
@@ -117,7 +92,7 @@ $result = $conn->query($sql);
                         <td><?= htmlspecialchars($row['student_name']) ?></td>
                         <td><?= htmlspecialchars($row['program']) ?></td>
                         <td><?= htmlspecialchars($row['semester']) ?></td>
-                        <td><a href="uploads/<?= htmlspecialchars($row['student_id_card']) ?>" target="_blank">View</a></td>
+                        <td><a href="<?= htmlspecialchars($row['student_id_card']) ?>" target="_blank">View</a></td>
                         <td><?= ucfirst($row['status']) ?></td>
                         <td>
                             <?php if ($row['status'] === 'pending'): ?>

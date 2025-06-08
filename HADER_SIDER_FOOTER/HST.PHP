@@ -211,14 +211,30 @@ function isActive($page, $dir = '') {
                 </li>
                 <li class="menu-item <?= isActive('Manage_User_Profile.php','MODULE_4') ?>">
                   <a href="../MODULE_4/Manage_User_Profile.php">
-                    <i class="fas fa-user-edit"></i> Manage Profile
+                    <i class="fas fa-user-edit"></i>  Profile
                   </a>
                 </li>
+
+                <li class="menu-item <?= isActive('Student-MembershipApplication.php','Module_1') ?>">
+                  <a href="../Module_1/Student-MembershipApplication.php">
+                    <i class="fas fa-id-card"></i> Manage Membership
+                  </a>
+                </li>
+                
+                <li class="menu-item <?= isActive('Student-ViewMembershipApproval.php','Module_1') ?>">
+                  <a href="../Module_1/Student-ViewMembershipApproval.php">
+                    <i class="fas fa-eye"></i> View Membership
+                  </a>
+                </li>
+
+
+
                 <li class="menu-item <?= isActive('view.php','Module_3') ?>">
                   <a href="../Module_3/Module_3/view.php">
                     <i class="fas fa-camera"></i> Scan Attendance
                   </a>
                 </li>
+
                 <li class="menu-item <?= isActive('historyatd.php','Module_3') ?>">
                   <a href="../Module_3/Module_3/historyatd.php">
                     <i class="fas fa-qrcode"></i> Attendance History
@@ -234,6 +250,9 @@ function isActive($page, $dir = '') {
                     <i class="fas fa-medal"></i> View Awarded Merits
                   </a>
                 </li>
+
+
+                
 
               <?php elseif ($role === 'advisor'): ?>
                 <!-- ADVISOR MENU -->
