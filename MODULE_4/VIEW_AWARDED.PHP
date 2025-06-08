@@ -98,15 +98,15 @@ include '../HADER_SIDER_FOOTER/HST.PHP';
 
     <!-- SUMMARY STATS -->
     <div class="summary-stats">
-      <div class="stat-card">
+      <div class="stat-card" style="background: #14519c">
         <div class="stat-number"><?= $total_points ?></div>
         <div class="stat-label">Total Merits Earned</div>
       </div>
-      <div class="stat-card" style="background: green">
+      <div class="stat-card" style="background: #14519c">
         <div class="stat-number"><?= $current_year_points ?></div>
         <div class="stat-label">Current Year Points</div>
       </div>
-      <div class="stat-card" style="background: #ffd93d">
+      <div class="stat-card" style="background: #14519c">
         <div class="stat-number"><?= count($events_data) ?></div>
         <div class="stat-label">Events Attended</div>
       </div>

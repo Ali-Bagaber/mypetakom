@@ -324,19 +324,19 @@ include '../HADER_SIDER_FOOTER/HST.PHP';
 
         <!-- Statistics Cards -->
         <div class="summary-stats">
-            <div class="stat-card" style="background-color: blue;">
+            <div class="stat-card" style="background-color: #14519c;">
                 <div class="stat-number"><?= $stats['total_claims'] ?></div>
                 <div class="stat-label">Total Claims</div>
             </div>
-            <div class="stat-card" style="background: #ffd93d;">
+            <div class="stat-card" style="background: #14519c;">
                 <div class="stat-number"><?= $stats['pending_claims'] ?></div>
                 <div class="stat-label">Pending Claims</div>
             </div>
-            <div class="stat-card" style="background:  #48c78e;">
+            <div class="stat-card" style="background:  #14519c;">
                 <div class="stat-number"><?= $stats['approved_claims'] ?></div>
                 <div class="stat-label">Approved Claims</div>
             </div>
-            <div class="stat-card" style="background:  #ff6b9d;">
+            <div class="stat-card" style="background:  #14519c;">
                 <div class="stat-number"><?= $stats['rejected_claims'] ?></div>
                 <div class="stat-label">Rejected Claims</div>
             </div>
@@ -351,6 +351,7 @@ include '../HADER_SIDER_FOOTER/HST.PHP';
                 <button class="tab-btn" data-tab="submitted">
                     <i class="fas fa-list"></i> My Claims (<?= count($existing_claims) ?>)
                 </button>
+                
             </div>
 
             <!-- Available Events Tab -->

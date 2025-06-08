@@ -156,25 +156,25 @@ $user_id = $row['user_id'];
 
     <div class="widget-row">
       <!-- Total Merit Widget -->
-      <div class="card">
+      <div class="card" style="background: #14519c">
         <div class="icon-box">
           <i class="fas fa-award"></i>
-        </div>
-        <p>Total Merits Collected</p>
-        <div class="card-title"><?= number_format($total_merits) ?></div>
+        </div >
+        <p style="color: white;" >Total Merits Collected</p>
+        <div class="card-title" style="color: white;" ><?= number_format($total_merits) ?></div>
       </div>
 
       <!-- Current Year Merits Widget -->
-      <div class="card">
+      <div class="card" style="background: #14519c">
         <div class="icon-box" style="background: linear-gradient(135deg, var(--success), #48c78e);">
           <i class="fas fa-calendar-alt"></i>
         </div>
-        <p>Current Semester Merits</p>
-        <div class="card-title"><?= number_format($current_year_merits) ?></div>
+        <p style="color: white;" >Current Semester Merits</p>
+        <div class="card-title" style="color: white;" ><?= number_format($current_year_merits) ?></div>
       </div>
 
       <!-- QR Code Widget -->
-      <div class="card">
+      <div class="card" style="background: #14519c">
         <div class="qr-box">
           <?php if (!empty($student_info['student_qr'])): ?>
             <img src="<?= htmlspecialchars($student_info['student_qr']) ?>" alt="Student QR Code">
@@ -188,24 +188,7 @@ $user_id = $row['user_id'];
       </div>
 
       <!-- Membership Status Widget -->
-      <div class="card">
-        <div class="icon-box" style="background: linear-gradient(135deg, var(--warning), #ffd93d);">
-          <i class="fas fa-id-card"></i>
-        </div>
-        <p>Membership Status</p>
-        <?php if ($membership_info): ?>
-          <div class="card-title" style="font-size: 1.2rem; color: <?= $membership_info['status'] == 'active' ? 'var(--success)' : 'var(--danger)' ?>">
-            <?= ucfirst($membership_info['status']) ?>
-          </div>
-          <small style="color: var(--text-light);">
-            <?= htmlspecialchars($membership_info['membershipType']) ?>
-          </small>
-        <?php else: ?>
-          <div class="card-title" style="font-size: 1.2rem; color: var(--danger);">
-            No Membership
-          </div>
-        <?php endif; ?>
-      </div>
+ 
     </div>
 
     <div class="stats-row">
