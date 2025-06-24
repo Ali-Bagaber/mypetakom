@@ -225,19 +225,21 @@ function isActive($page, $dir = '') {
                   <a href="../Module_1/Student-ViewMembershipApproval.php">
                     <i class="fas fa-eye"></i> View Membership
                   </a>
-                </li>
-
-
-
-                <li class="menu-item <?= isActive('view.php','Module_3') ?>">
-                  <a href="../Module_3/view.php">
+                </li>                <li class="menu-item <?= isActive('scanatd.php','Module_3') ?>">
+                  <a href="../Module_3/scanatd.php">
                     <i class="fas fa-camera"></i> Scan Attendance
                   </a>
                 </li>
 
                 <li class="menu-item <?= isActive('historyatd.php','Module_3') ?>">
                   <a href="../Module_3/historyatd.php">
-                    <i class="fas fa-qrcode"></i> Attendance History
+                    <i class="fas fa-history"></i> Attendance History
+                  </a>
+                </li>
+
+                <li class="menu-item <?= isActive('viewatd.php','Module_3') ?>">
+                  <a href="../Module_3/viewatd.php">
+                    <i class="fas fa-eye"></i> View Attendance
                   </a>
                 </li>
                 <li class="menu-item <?= isActive('Manage_Merits_Claims.php','MODULE_4') ?>">
@@ -290,10 +292,19 @@ function isActive($page, $dir = '') {
                   <a href="../Module_4/manage_claim_advisor.php">
                     <i class="fas fa-check-double"></i> Merit Application Approval
                   </a>
-                </li>
-                <li class="menu-item <?= isActive('event_qr.php','Module_2') ?>">
+                </li>                <li class="menu-item <?= isActive('event_qr.php','Module_2') ?>">
                   <a href="../Module_2/event_qr.php">
                     <i class="fas fa-qrcode"></i> Event QR Code
+                  </a>
+                </li>
+                <li class="menu-item <?= isActive('manageatd.php','Module_3') ?>">
+                  <a href="../Module_3/manageatd.php">
+                    <i class="fas fa-clipboard-list"></i> Manage Attendance
+                  </a>
+                </li>
+                <li class="menu-item <?= isActive('createatd.php','Module_3') ?>">
+                  <a href="../Module_3/createatd.php">
+                    <i class="fas fa-plus-circle"></i> Create Attendance
                   </a>
                 </li>
 

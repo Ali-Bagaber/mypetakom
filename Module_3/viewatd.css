@@ -1,3 +1,4 @@
+/* ===== Base Styling ===== */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -5,7 +6,7 @@ body {
   color: #333;
 }
 
-/* Header */
+/* ===== Header ===== */
 .header {
   display: flex;
   justify-content: space-between;
@@ -45,13 +46,13 @@ body {
   cursor: pointer;
 }
 
-/* Layout */
+/* ===== Layout ===== */
 .main-content {
   display: flex;
   min-height: calc(100vh - 60px);
 }
 
-/* Sidebar */
+/* ===== Sidebar ===== */
 .sidebar {
   width: 200px;
   background: #002240;
@@ -71,6 +72,7 @@ body {
 .nav-menu ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .nav-menu a {
@@ -85,7 +87,7 @@ body {
   background: #cc0000;
 }
 
-/* Content */
+/* ===== Content Area ===== */
 .content {
   flex: 1;
   padding: 20px;
@@ -97,7 +99,7 @@ body {
   color: #333;
 }
 
-/* Table */
+/* ===== Table ===== */
 .table-wrap {
   background: #fff;
   padding: 10px;
@@ -122,4 +124,19 @@ body {
 #attd-table th {
   background: #003366;
   color: #fff;
+}
+
+/* ===== Buttons ===== */
+.delete-btn {
+  padding: 6px 10px;
+  background: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.delete-btn:hover {
+  background: #218838;
 }
