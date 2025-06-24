@@ -103,10 +103,37 @@ $user_id = $row['user_id'];
   $stmt5->bind_param("ii", $user_id, $current_year);
   $stmt5->execute();
   $chart_result = $stmt5->get_result();
-
   $monthly_data = array_fill(1, 12, 0); // Initialize all months with 0
   while ($row = $chart_result->fetch_assoc()) {
       $monthly_data[$row['month']] = $row['monthly_points'];
+  }
+
+  // Get event participation by level for pie chart
+  $event_level_sql = "SELECT 
+                        e.event_level,
+                        COUNT(*) as participation_count,
+                        SUM(m.points) as total_points
+                      FROM merit m
+                      JOIN events e ON m.event_id = e.event_id
+                      JOIN attendance a ON a.event_id = e.event_id AND a.user_id = m.user_id
+                      WHERE m.user_id = ? AND a.status_attd = 'present'
+                      GROUP BY e.event_level
+                      ORDER BY participation_count DESC";
+
+  $stmt_level = $conn->prepare($event_level_sql);
+  $stmt_level->bind_param("i", $user_id);
+  $stmt_level->execute();
+  $level_result = $stmt_level->get_result();
+
+  $level_data = [];
+  $level_labels = [];
+  $level_colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'];
+  $color_index = 0;
+
+  while ($row = $level_result->fetch_assoc()) {
+      $level_labels[] = $row['event_level'] ?? 'Unknown';
+      $level_data[] = $row['participation_count'];
+      $color_index++;
   }
 
   // Get membership status
@@ -133,9 +160,51 @@ $user_id = $row['user_id'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Dashboard – Awarded Merits</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../../mypetakom-1/CSS/dashbord.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">    <link rel="stylesheet" href="../../mypetakom-1/CSS/dashbord.css">
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <style>
+    .stats-row {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .merits-table {
+      flex: 1;
+      min-width: 400px;
+    }
+    
+    .charts-container {
+      flex: 1;
+      min-width: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .chart-card {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .chart-wrapper {
+      height: 300px;
+      margin: 15px 0;
+    }
+    
+    @media (max-width: 1024px) {
+      .stats-row {
+        flex-direction: column;
+      }
+      
+      .merits-table,
+      .charts-container {
+        min-width: 100%;
+      }
+    }
+  </style>
   </head>
   <body>
   <!-- Main Content -->
@@ -144,14 +213,7 @@ $user_id = $row['user_id'];
       <h2>Student Dashboard</h2>
       <p><b>Welcome back, <?= htmlspecialchars($student_info['student_name'] ?? 'Student') ?>!</b><br>Track Your Awarded Merits and Activities</p>
       
-      <div class="header-actions">
-        <button class="btn-info" onclick="location.href='../profile/manage_profile.php'">
-          <i class="fas fa-user-edit"></i> Manage Profile
-        </button>
-        <button class="btn-primary" onclick="location.href='../claims/add_claim.php'">
-          <i class="fas fa-plus"></i> Add Merit Claim
-        </button>
-      </div>
+
     </div>
 
     <div class="widget-row">
@@ -174,41 +236,59 @@ $user_id = $row['user_id'];
       </div>
 
       <!-- QR Code Widget -->
-      <div class="card" style="background: #14519c">
-        <div class="qr-box">
-          <?php if (!empty($student_info['student_qr'])): ?>
-            <img src="<?= htmlspecialchars($student_info['student_qr']) ?>" alt="Student QR Code">
-          <?php else: ?>
-            <img src="../templet ( use this to match our overview)/image/download.png" alt="Default QR Code">
-          <?php endif; ?>
-        </div>
-        <a href="<?= !empty($student_info['student_qr']) ? $student_info['student_qr'] : '../templet.html' ?>" download class="btn-sm">
-          <i class="fas fa-download"></i> Download QR
-        </a>
-      </div>
+<!-- QR Code Widget -->
+<div class="card" style="background: #14519c">
+  <div class="qr-box">
+    <?php 
+      $host = $_SERVER['HTTP_HOST'];
+      $path = dirname($_SERVER['PHP_SELF']);
+      $qrLink = "http://{$host}{$path}/student_info.php?student_id=" . $user_id;
 
-      <!-- Membership Status Widget -->
- 
-    </div>
 
-    <div class="stats-row">
-<!-- Merit Growth Chart -->
-<div class="chart-card">
-  <h3>Merit Growth Over Time (<?= $current_year ?>)</h3>
-  <div class="chart-wrapper">
-    <canvas id="statisticsChart"></canvas>
+    ?>
+    <div id="studentQR" data-qrtext="<?= $qrLink ?>"></div>
   </div>
-  <div class="chart-buttons">
-    <button class="btn-export" onclick="exportChart()">
-      <i class="fas fa-file-export"></i> Export
-    </button>
-    <button class="btn-print" onclick="window.print()">
-      <i class="fas fa-print"></i> Print
-    </button>
-  </div>
+  <button onclick="downloadStudentQR()">⬇ Download QR</button>
+  <button onclick="copyLink('<?= $qrLink ?>')">Copy Link</button>
 </div>
 
-      <!-- Recent Awarded Merits Table -->
+    </div>    <div class="stats-row">
+      <!-- Charts Container - Left Side -->
+      <div class="charts-container">
+        <!-- Merit Growth Chart -->
+        <div class="chart-card">
+          <h3>Merit Growth Over Time (<?= $current_year ?>)</h3>
+          <div class="chart-wrapper">
+            <canvas id="statisticsChart"></canvas>
+          </div>
+          <div class="chart-buttons">
+            <button class="btn-export" onclick="exportChart()">
+              <i class="fas fa-file-export"></i> Export
+            </button>
+            <button class="btn-print" onclick="window.print()">
+              <i class="fas fa-print"></i> Print
+            </button>
+          </div>
+        </div>
+
+        <!-- Event Participation by Level Chart -->
+        <div class="chart-card">
+          <h3>Event Participation by Level</h3>
+          <div class="chart-wrapper">
+            <canvas id="participationChart"></canvas>
+          </div>
+          <div class="chart-buttons">
+            <button class="btn-export" onclick="exportParticipationChart()">
+              <i class="fas fa-file-export"></i> Export
+            </button>
+            <button class="btn-refresh" onclick="refreshParticipationChart()">
+              <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Awarded Merits Table - Right Side -->
       <div class="merits-table">
         <h3>Recent Events and Merits</h3>
         <table>
@@ -335,6 +415,63 @@ $user_id = $row['user_id'];
     }
 });
 
+// Event Participation Pie Chart
+const participationCtx = document.getElementById('participationChart').getContext('2d');
+const levelLabels = <?= json_encode($level_labels) ?>;
+const levelData = <?= json_encode($level_data) ?>;
+
+const participationChart = new Chart(participationCtx, {
+    type: 'doughnut',
+    data: {
+        labels: levelLabels.length > 0 ? levelLabels : ['No Data'],
+        datasets: [{
+            label: 'Event Participation',
+            data: levelData.length > 0 ? levelData : [1],
+            backgroundColor: [
+                '#FF6384',
+                '#36A2EB', 
+                '#FFCE56',
+                '#4BC0C0',
+                '#9966FF',
+                '#FF9F40',
+                '#FF6B6B',
+                '#4ECDC4'
+            ],
+            borderColor: '#fff',
+            borderWidth: 2,
+            hoverOffset: 4
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: true,
+                position: 'bottom',
+                labels: {
+                    padding: 20,
+                    usePointStyle: true,
+                    font: {
+                        size: 12
+                    }
+                }
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        const label = context.label || '';
+                        const value = context.parsed;
+                        const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                        const percentage = ((value / total) * 100).toFixed(1);
+                        return label + ': ' + value + ' events (' + percentage + '%)';
+                    }
+                }
+            }
+        }
+    }
+});
+
   function exportChart() {
       const link = document.createElement('a');
       link.download = 'merit-growth-chart.png';
@@ -342,7 +479,40 @@ $user_id = $row['user_id'];
       link.click();
   }
 
+  function exportParticipationChart() {
+      const link = document.createElement('a');
+      link.download = 'participation-chart.png';
+      link.href = participationChart.toBase64Image();
+      link.click();
+  }
 
+  function refreshParticipationChart() {
+      location.reload();
+  }
+
+window.onload = function () {
+  const qrText = document.getElementById("studentQR").getAttribute("data-qrtext");
+  new QRCode(document.getElementById("studentQR"), {
+    text: qrText,
+    width: 100,
+    height: 100
+  });
+};
+
+function downloadStudentQR() {
+  const canvas = document.querySelector('#studentQR canvas');
+  if (!canvas) return alert("QR code not ready yet.");
+  const link = document.createElement('a');
+  link.href = canvas.toDataURL("image/png");
+  link.download = "student_qr.png";
+  link.click();
+}
+
+function copyLink(link) {
+  navigator.clipboard.writeText(link).then(() => {
+    alert("Link copied to clipboard");
+  });
+}
   </script>
 
   </body>

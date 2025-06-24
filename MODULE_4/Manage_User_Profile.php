@@ -2,91 +2,30 @@
 session_start();
 include '../../Databased/db_connect.php';
 
-// Identify current user
-$user_id = $_SESSION['user_id'] ?? 1;
-
-// Initialize messages
-$success = '';
-$error   = '';
-
-// Handle form submission
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Collect and sanitize input
-    $username        = trim($_POST['username']);
-    $email           = trim($_POST['email']);
-    $student_name    = trim($_POST['student_name']);
-    // Fixed fields remain submitted via readonly inputs
-    $student_id_card = trim($_POST['student_id_card']);
-    $program         = trim($_POST['program']);
-    $semester        = trim($_POST['semester']);
-    $faculty         = trim($_POST['faculty']);
-
-    // Basic validation
-    if (!$username || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error = "Please enter a valid username and email.";
-    } else {
-        // Update users table
-        $updUser = $conn->prepare("UPDATE users SET username = ?, email = ? WHERE user_id = ?");
-        $updUser->bind_param("ssi", $username, $email, $user_id);
-        $updUser->execute();
-        $updUser->close();
-
-        // Check if student row exists
-        $check = $conn->prepare("SELECT student_id FROM student WHERE user_id = ?");
-        $check->bind_param("i", $user_id);
-        $check->execute();
-        $res = $check->get_result();
-        $check->close();
-
-        if ($res->num_rows) {
-            // Update existing student record
-            $updStu = $conn->prepare(
-                "UPDATE student
-                   SET student_name    = ?,
-                       student_id_card = ?,
-                       program         = ?,
-                       semester        = ?,
-                       faculty         = ?
-                 WHERE user_id = ?"
-            );
-            $updStu->bind_param(
-                "sssssi",
-                $student_name,
-                $student_id_card,
-                $program,
-                $semester,
-                $faculty,
-                $user_id
-            );
-            $ok = $updStu->execute();
-            $updStu->close();
-        } else {
-            // Insert new student record
-            $insStu = $conn->prepare(
-                "INSERT INTO student
-                    (user_id, student_name, student_id_card, program, semester, faculty)
-                 VALUES (?, ?, ?, ?, ?, ?)"
-            );
-            $insStu->bind_param(
-                "isssss",
-                $user_id,
-                $student_name,
-                $student_id_card,
-                $program,
-                $semester,
-                $faculty
-            );
-            $ok = $insStu->execute();
-            $insStu->close();
-        }
-
-        if ($ok) {
-            $success = "Profile updated successfully!";
-        } else {
-            $error = "Failed to save student details.";
-        }
-    }
+if (
+    !isset($_SESSION['username'], $_SESSION['userRole'])
+    || $_SESSION['userRole'] !== 'student'
+) {
+    header("Location: ../Module_1/Login.php");
+    exit;
 }
+
+
+
+// 2️ Look up the real user_id from the DB
+$stmt = $conn->prepare("SELECT user_id FROM users WHERE username = ?");
+$stmt->bind_param("s", $_SESSION['username']);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows !== 1) {
+    // Something’s wrong—kick back to login
+    header("Location: ../Module_1/Login.php");
+    exit;
+}
+
+$row = $result->fetch_assoc();
+$user_id = $row['user_id'];
 
 // Load current values
 $q = $conn->prepare(
@@ -161,7 +100,7 @@ include '../HADER_SIDER_FOOTER/HST.PHP';
         <label for="faculty">Faculty</label>
         <input type="text" id="faculty" name="faculty" readonly value="<?= htmlspecialchars($faculty) ?>" disabled>
       </div>
-      
+
     </div>
   </div>
 

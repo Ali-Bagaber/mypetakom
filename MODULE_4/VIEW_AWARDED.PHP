@@ -86,14 +86,7 @@ include '../HADER_SIDER_FOOTER/HST.PHP';
       <h2><i class="fas fa-medal"></i> View Awarded Merits</h2>
       <p><b>Track your earned merits and achievements</b><br>
          Review all merits awarded through your event participation</p>
-      <div class="header-actions">
-        <button class="btn-info" onclick="window.print()">
-          <i class="fas fa-print"></i> Print Report
-        </button>
-        <button class="btn-primary" onclick="exportToCSV()">
-          <i class="fas fa-download"></i> Export CSV
-        </button>
-      </div>
+
     </div>
 
     <!-- SUMMARY STATS -->
